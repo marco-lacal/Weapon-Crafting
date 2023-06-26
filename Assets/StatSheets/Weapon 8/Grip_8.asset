@@ -15,10 +15,10 @@ MonoBehaviour:
   rateOfFire: 0
   damage: 0
   range: 0
-  stability: 0
-  recoilControl: 0
-  handling: 0
-  reloadSpeed: 0
+  stability: 2
+  recoilControl: 10
+  handling: 10
+  reloadSpeed: 3
   magazine: 0
   zoomFactor: 0
   inventorySize: 0

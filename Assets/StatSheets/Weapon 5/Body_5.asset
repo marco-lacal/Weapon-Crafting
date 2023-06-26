@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4748e146e39ba9143b167de2310b2435, type: 3}
   m_Name: Body_5
   m_EditorClassIdentifier: 
-  rateOfFire: 120
+  rateOfFire: 100
   damage: 40
   range: 58
   stability: 8
@@ -21,3 +21,4 @@ MonoBehaviour:
   reloadSpeed: -6
   magazine: 0
   zoomFactor: 0
+  inventorySize: 0

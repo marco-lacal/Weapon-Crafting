@@ -18,7 +18,7 @@ MonoBehaviour:
   stability: 0
   recoilControl: 0
   handling: 0
-  reloadSpeed: 0
-  magazine: 0
+  reloadSpeed: 50
+  magazine: 30
   zoomFactor: 0
-  inventorySize: 0
+  inventorySize: 300
