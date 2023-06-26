@@ -10,7 +10,7 @@ public class Banshee45 : MonoBehaviour
 
         for(int i = 0; i < weaponPartNums.Length; i++)
         {
-            weaponPartNums[i] = Random.Range(0, 7) + 1;
+            weaponPartNums[i] = Random.Range(0, 8) + 1;
         }
 
         return weaponPartNums;
