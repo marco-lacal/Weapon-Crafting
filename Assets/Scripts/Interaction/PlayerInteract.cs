@@ -24,6 +24,12 @@ public class PlayerInteract : MonoBehaviour
         //raycast that will only collide with interactable objects on the eighth layer
         if(Physics.Raycast(transform.position, transform.forward, out hit, 3f, 1 << 8))
         {
+            if(!GameObject.ReferenceEquals(hit.transform.GetComponent<Interactable>(), foundInteractable) && foundInteractable != null)
+            {
+                foundInteractable.DestroyPrompt();
+                foundInteractable = null;
+            }
+
             foundInteractable = hit.transform.GetComponent<Interactable>();
 
             if(!foundInteractable.hasBeenInteractedWith)

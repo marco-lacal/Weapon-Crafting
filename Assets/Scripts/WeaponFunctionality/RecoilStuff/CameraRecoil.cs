@@ -74,7 +74,7 @@ public class CameraRecoil : MonoBehaviour
                 break;
             case WeaponType.SemiAuto:
                 xRecoil = (300 / stats.RecoilControl) * isADSScalar;
-                yRecoil = (200 / stats.Stability) * isADSScalar;
+                yRecoil = (150 / stats.Stability) * isADSScalar;
 
                 kickStrength = 0.005f;
                 stabization = 0.05f;

@@ -16,8 +16,9 @@ MonoBehaviour:
   damage: 7
   range: 10
   stability: 23
-  recoilControl: 34
+  recoilControl: 36
   handling: 8
   reloadSpeed: 4
   magazine: 0
   zoomFactor: 0
+  inventorySize: 0
