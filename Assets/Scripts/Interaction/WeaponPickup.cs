@@ -85,6 +85,7 @@ public class WeaponPickup : Interactable
 
     void OnDisable()
     {
+        // this statement equates to true whenever the game is ended and all objects are disabled
         if(transform.parent == null)
         {
             return;

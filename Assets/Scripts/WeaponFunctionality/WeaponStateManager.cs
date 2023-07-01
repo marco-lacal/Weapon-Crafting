@@ -63,6 +63,7 @@ public class WeaponStateManager : Subject
         recoilManager = GetComponent<RecoilEventManager>();
     }
 
+    //not used anywhere
     public void Notify()
     {
         NotifyObservers();

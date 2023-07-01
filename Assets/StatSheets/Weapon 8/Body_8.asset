@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Body_8
   m_EditorClassIdentifier: 
   rateOfFire: 180
-  damage: 30
+  damage: 25
   range: 35
   stability: 5
   recoilControl: 30

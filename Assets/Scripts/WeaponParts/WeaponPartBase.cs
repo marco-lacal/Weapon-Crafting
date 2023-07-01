@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//need monobehaviour to do transform stuff - will keep like this until I can get another system
+//need monobehaviour to do transform stuff
 public abstract class WeaponPartBase : MonoBehaviour
 {
     public StatSheet StatSheet {get => statSheet;}

@@ -7,6 +7,7 @@ public class CameraObserver : MonoBehaviour, IObserver
     [SerializeField] private Subject WSM;
     private Camera cameraRef;
 
+    //Not used anywhere
     public void OnNotify()
     {
         cameraRef.fieldOfView = 60;
@@ -16,7 +17,6 @@ public class CameraObserver : MonoBehaviour, IObserver
     {
         int zoomIn = 60 - zoomFactor;
 
-        //will replace the 0.02f's with handling eventually
         if(type == ZoomAction.In)
         {
             cameraRef.fieldOfView = Mathf.Lerp(cameraRef.fieldOfView, zoomIn, adsSpeed);

@@ -15,6 +15,7 @@ public abstract class Subject : MonoBehaviour
         observers.Remove(observer);
     }
 
+    //never used
     protected void NotifyObservers()
     {
         observers.ForEach((observer) => {

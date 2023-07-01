@@ -10,7 +10,7 @@ public class ADSShoot_State : WeaponBaseState
 
     private float lastShot;
 
-    private Coroutine ass;
+    private Coroutine burstCR;
 
     public override void EnterState(WeaponStateManager WSM)
     {
@@ -46,12 +46,12 @@ public class ADSShoot_State : WeaponBaseState
                     WSM.SwitchState(WSM.ADS);
                     break;
                 case WeaponType.BurstFire:
-                    if(ass != null)
+                    if(burstCR != null)
                     {
                         return;
                     }
 
-                    ass = WSM.StartCoroutine(BurstFireCoroutine(WSM, WSM.BurstSize, WSM.BurstDelay));
+                    burstCR = WSM.StartCoroutine(BurstFireCoroutine(WSM, WSM.BurstSize, WSM.BurstDelay));
 
                     WSM.SwitchState(WSM.ADS);
                     break;
@@ -75,13 +75,19 @@ public class ADSShoot_State : WeaponBaseState
 
     public void DetermineADSPosition(WeaponStateManager WSM)
     {
+        //this is the desired position of the RETICLE. 
         Vector3 scopePosition = (WSM.transform.forward / 2) + WSM.transform.position;
 
+        //set the desired position (localScope) and reticle's position (temp)
+        //to local space since I want to get a localPosition value
         Vector3 localScope = WSM.transform.InverseTransformPoint(scopePosition);
         Vector3 temp = WSM.transform.InverseTransformPoint(reticle.position);
 
+        //perform vector subtraction to determine the
+        //offset that I need to move the entire gun by
         Vector3 localVector = localScope - temp;
 
+        //now add that offset, then interpolate towards ADS on each frame
         ADS = WSM.EquippedWeapon.localPosition + localVector;
     }
 
@@ -136,7 +142,7 @@ public class ADSShoot_State : WeaponBaseState
             }
         }
 
-        ass = null;
+        burstCR = null;
     }
 
     public void DamageCalculation(WeaponStateManager WSM, RaycastHit hit, bool isBody)

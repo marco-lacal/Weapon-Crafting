@@ -4,15 +4,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WeaponStatsSheet : MonoBehaviour
+public class WSS : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI weaponName;
-    private Text RoF;
+    [SerializeField] private TextMeshProUGUI[] numberStuff;
     [SerializeField] private Transform[] fillBars;
 
     public void CreateStatSheet(StatSheet stats)
     {
-        weaponName.text = stats.Name;
+        numberStuff[0].text = stats.Name;
+        numberStuff[1].text = stats.RateOfFire.ToString();
+        numberStuff[2].text = stats.PracticalMagazine.ToString() + "/" + stats.Magazine.ToString();
+        numberStuff[3].text = stats.InventorySize.ToString();
 
         // for(int i = 0; i < values.Length; i++)
         // {
@@ -40,6 +42,12 @@ public class WeaponStatsSheet : MonoBehaviour
         //     fillBars[i].localScale = new Vector3((float)(values[i])/100, 1, 1);
         // }
 
-        
+        fillBars[0].localScale = new Vector3((float)(stats.Damage)/100, 1, 1);
+        fillBars[1].localScale = new Vector3((float)(stats.Range)/100, 1, 1);
+        fillBars[2].localScale = new Vector3((float)(stats.Stability)/100, 1, 1);
+        fillBars[3].localScale = new Vector3((float)(stats.RecoilControl)/100, 1, 1);
+        fillBars[4].localScale = new Vector3((float)(stats.Handling)/100, 1, 1);
+        fillBars[5].localScale = new Vector3((float)(stats.ReloadSpeed)/100, 1, 1);
+        fillBars[6].localScale = new Vector3((float)(stats.ZoomFactor)/100, 1, 1);
     }
 }

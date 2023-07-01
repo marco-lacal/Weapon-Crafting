@@ -3253,7 +3253,7 @@ GameObject:
   - component: {fileID: 623818383741028261}
   - component: {fileID: 623818383741028267}
   - component: {fileID: 623818383741028266}
-  - component: {fileID: 6545049176777740358}
+  - component: {fileID: 8325014305236850249}
   m_Layer: 5
   m_Name: WeaponStats
   m_TagString: Untagged
@@ -3321,7 +3321,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6545049176777740358
+--- !u!114 &8325014305236850249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3330,7 +3330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 623818383741028260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f0358667bd812240a7724071e8ea283, type: 3}
+  m_Script: {fileID: 11500000, guid: 783b2e6e80178594db7fd0782f107d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   numberStuff:

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Banshee45 : MonoBehaviour
 {
+    [SerializeField] private int min;
+    [SerializeField] private int numWeapons;
+
     public int[] RandomNumbers()
     {
         int[] weaponPartNums = new int[6];
 
         for(int i = 0; i < weaponPartNums.Length; i++)
         {
-            weaponPartNums[i] = Random.Range(0, 8) + 1;
+            weaponPartNums[i] = Random.Range(min, numWeapons) + 1;
         }
 
         return weaponPartNums;

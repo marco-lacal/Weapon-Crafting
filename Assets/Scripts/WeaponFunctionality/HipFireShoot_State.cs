@@ -9,7 +9,7 @@ public class HipFireShoot_State : WeaponBaseState
 
     private float lastShot;
 
-    private Coroutine ass;
+    private Coroutine burstCR;
 
     public override void EnterState(WeaponStateManager WSM)
     {
@@ -49,12 +49,12 @@ public class HipFireShoot_State : WeaponBaseState
                     WSM.SwitchState(WSM.HipFire);
                     break;
                 case WeaponType.BurstFire:
-                    if(ass != null)
+                    if(burstCR != null)
                     {
                         return;
                     }
 
-                    ass = WSM.StartCoroutine(BurstFireCoroutine(WSM, WSM.BurstSize, WSM.BurstDelay));
+                    burstCR = WSM.StartCoroutine(BurstFireCoroutine(WSM, WSM.BurstSize, WSM.BurstDelay));
 
                     WSM.SwitchState(WSM.HipFire);
                     break;
@@ -137,7 +137,7 @@ public class HipFireShoot_State : WeaponBaseState
             }
         }
 
-        ass = null;
+        burstCR = null;
     }
 
     public void DamageCalculation(WeaponStateManager WSM, RaycastHit hit, bool isBody)

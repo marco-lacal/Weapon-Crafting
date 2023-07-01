@@ -23,12 +23,14 @@ public class StatsCreation : MonoBehaviour
         {
             parts.Add(transform.GetChild(i).GetComponent<WeaponPartBase>().StatSheet);
 
+            // when index = 1, that is the Body we are looking at, so get the guns's name
             if(i == 1)
             {
                 weaponStats.Name = transform.GetChild(i).GetComponent<Body>().Name;
             }
         }
 
+        // Just in case :)
         if(parts.Count != 6)
         {
             Debug.Log("Massive Fucking error");
@@ -68,8 +70,6 @@ public class StatsCreation : MonoBehaviour
         parts.Clear();
 
         weaponStats.SetStatSheetToStatsList(statsList);
-
-        //Destroy(this);
 
         return weaponStats;
     }
