@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class WSS : MonoBehaviour
 {
+    //array of size 4
     [SerializeField] private TextMeshProUGUI[] numberStuff;
+    //array of size 7
     [SerializeField] private Transform[] fillBars;
 
+    //set the values and scales of the WeaponStats UI prefab
     public void CreateStatSheet(StatSheet stats)
     {
         numberStuff[0].text = stats.Name;

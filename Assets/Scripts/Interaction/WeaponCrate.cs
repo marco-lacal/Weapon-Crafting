@@ -28,8 +28,10 @@ public class WeaponCrate : Interactable
 
         Destroy(padLock);
 
+        //enable the BoxCollider that is normally disabled on the top of the crate
         topOfLid.GetComponent<BoxCollider>().enabled = true;
 
+        //now that the BoxCollider is active, rotate the lid
         script = topOfLid.GetComponent<RotateLid>();
         script.enabled = true;
 
@@ -67,15 +69,17 @@ public class WeaponCrate : Interactable
 
     IEnumerator WaitForRotation()
     {
+        //this will remain true as long as the RotateLid script is active
         while(script.enabled)
         {
             yield return null;
         }
 
-        //Debug.Log("Rotation has stopped. now create weaponpickup");
+        //Rotation has stopped. now create weaponpickup
         //Instantiate a weaponPickup
         GameObject wP = Instantiate(weaponPickup, transform.position + Vector3.up, Quaternion.identity);
         
+        //to match the direction of the crate
         wP.transform.localEulerAngles = transform.localEulerAngles;
     }
 }

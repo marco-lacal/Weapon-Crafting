@@ -145,6 +145,7 @@ public class ADSShoot_State : WeaponBaseState
         burstCR = null;
     }
 
+    //This is currently not working as intended for going past range. will work to fix it soon
     public void DamageCalculation(WeaponStateManager WSM, RaycastHit hit, bool isBody)
     {
         //want to change this when i eventually add enemies. will have the enemy interface have body and crit multipliers that vary per enemy type

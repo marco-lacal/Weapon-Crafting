@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//pretty much rotate the lid until it collides then disable this
+//only have this for now because exporting animations wasn't working out for me
 public class RotateLid : MonoBehaviour
 {
     private bool active;

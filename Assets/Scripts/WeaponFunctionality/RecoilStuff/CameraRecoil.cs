@@ -13,8 +13,8 @@ public class CameraRecoil : MonoBehaviour
     private float yRecoil;
 
     //Figure out good values for each of these to replace the static interpolation values in the Update() lerps
-    private float kickStrength;
-    private float stabization;
+    private float stabization;     //determines how quickly the weapon returns to (0, 0, 0): higher = near instant; lower = slow
+    private float kickStrength;     //determine the kick strength of the weapon: higher = very jumpy; lower = smooth
 
     void Awake()
     {
@@ -62,22 +62,22 @@ public class CameraRecoil : MonoBehaviour
                 xRecoil = (200 / stats.RecoilControl) * isADSScalar;
                 yRecoil = (200 / stats.Stability) * isADSScalar;
 
-                kickStrength = 0.007f;
-                stabization = 0.02f;
+                stabization = 0.007f;
+                kickStrength = 0.02f;
                 break;
             case WeaponType.BurstFire:
                 xRecoil = (250 / stats.RecoilControl) * isADSScalar;
                 yRecoil = (150 / stats.Stability) * isADSScalar;
 
-                kickStrength = 0.01f;
-                stabization = 0.03f;
+                stabization = 0.01f;
+                kickStrength = 0.03f;
                 break;
             case WeaponType.SemiAuto:
                 xRecoil = (300 / stats.RecoilControl) * isADSScalar;
                 yRecoil = (150 / stats.Stability) * isADSScalar;
 
-                kickStrength = 0.005f;
-                stabization = 0.05f;
+                stabization = 0.005f;
+                kickStrength = 0.05f;
                 break;
             default:
                 Debug.Log("Big error");
@@ -91,8 +91,8 @@ public class CameraRecoil : MonoBehaviour
 
     void Update()
     {
-        targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, kickStrength);
-        currentRotation = Vector3.Slerp(currentRotation, targetRotation, stabization);
+        targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, stabization);
+        currentRotation = Vector3.Slerp(currentRotation, targetRotation, kickStrength);
         transform.localRotation = Quaternion.Euler(currentRotation);
 
         if(transform.localRotation.eulerAngles == Vector3.zero)

@@ -48,19 +48,24 @@ public class WeaponPickup : Interactable
 
     //     Destroy(transform.gameObject);
     // }
+    
+    //the local position to place this gun at when it's equipped to the player
     private Vector3 inherentPosition;
 
     private StatSheet stats;
 
+    //an additional prompt prefab for the weapon stats display
     [SerializeField] private GameObject prefabSheet;
     private GameObject instSheet;
 
     void Awake()
     {
+        //create gun
         inherentPosition = transform.GetComponent<Banshee45>().Creation(transform);
 
         Destroy(transform.GetComponent<Banshee45>());
 
+        //create stats
         stats = transform.GetComponent<StatsCreation>().CalculateStats();
 
         //USE THIS FOR TESTING LATER
@@ -72,17 +77,22 @@ public class WeaponPickup : Interactable
         //VERY IMPORTANT TO DO
     }
 
+    //when this script is enabled, it means its either been spawned for the first time or been dropped
     void OnEnable()
     {
         hasBeenInteractedWith = false;
 
+        //enable BoxCollider so the raycast from player camera can collide with this object again
         transform.GetComponent<BoxCollider>().enabled = true;
 
+        //set the layers to Interactable from Weapon
         RecursivelyChangeLayers(transform, 8);
 
+        //for physics shenanagins
         transform.gameObject.AddComponent<Rigidbody>();
     }
 
+    //whenever the gun is picked up
     void OnDisable()
     {
         // this statement equates to true whenever the game is ended and all objects are disabled
@@ -93,6 +103,7 @@ public class WeaponPickup : Interactable
         
         transform.GetComponent<BoxCollider>().enabled = false;
         
+        //set gun layers to Weapon so weapon camera can see it properly
         RecursivelyChangeLayers(transform, 6);
 
         Destroy(transform.GetComponent<Rigidbody>());

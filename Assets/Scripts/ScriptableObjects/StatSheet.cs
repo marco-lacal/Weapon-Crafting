@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "StatSheet")]
 public class StatSheet : ScriptableObject
 {
+    //getters for every stat
     public int RateOfFire {get {return rateOfFire; }}
     public int Damage {get {return damage; }}
     public int Range {get {return range; }}
@@ -15,6 +16,7 @@ public class StatSheet : ScriptableObject
     public int ZoomFactor {get {return zoomFactor; }}
     public int InventorySize {get {return inventorySize; } set {inventorySize = value;}}
 
+    //this value stores the amount of bullets remaining
     public int PracticalMagazine {get {return practicalMagazine;} set {practicalMagazine = value;}}
 
     public List<int> StatsList {get {return statsList; }}
@@ -36,6 +38,7 @@ public class StatSheet : ScriptableObject
 
     private string weaponName;
 
+    //List of ints to store this StatSheet's stats that will be accessed in StatsCreation
     private List<int> statsList;
 
     void Awake()
@@ -43,6 +46,7 @@ public class StatSheet : ScriptableObject
         weaponName = "";
     }
 
+    //on awake, create a List containing the stats
     public void SetStatsListForParts()
     {
         statsList = new List<int>();
@@ -59,6 +63,7 @@ public class StatSheet : ScriptableObject
         statsList.Add(inventorySize);
     }
 
+    //set the StatSheet stats equal to the passed in List values
     public void SetStatSheetToStatsList(List<int> stats)
     {
         rateOfFire = stats[0];

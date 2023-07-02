@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Both camera objects have this script on it
 public class CameraObserver : MonoBehaviour, IObserver
 {
+    //reference to the Subject WSM so that on enable, we can add and remove this script from the List of observers
     [SerializeField] private Subject WSM;
     private Camera cameraRef;
 
@@ -13,6 +15,7 @@ public class CameraObserver : MonoBehaviour, IObserver
         cameraRef.fieldOfView = 60;
     }
 
+    //used to zoom in or out based on ZoomAction (see WeaponStateManager for the enum)
     public void OnNotify(ZoomAction type, int zoomFactor, float adsSpeed)
     {
         int zoomIn = 60 - zoomFactor;
@@ -27,6 +30,7 @@ public class CameraObserver : MonoBehaviour, IObserver
         }
     }
 
+    //add this object to the WSM List when its active
     private void OnEnable()
     {
         //add itself to the Subject's list of observers instead of the other way around
@@ -34,6 +38,7 @@ public class CameraObserver : MonoBehaviour, IObserver
         cameraRef = transform.GetComponent<Camera>();
     }
 
+    //then remove it when its unactive
     private void OnDisable()
     {
         WSM.RemoveObserver(this);

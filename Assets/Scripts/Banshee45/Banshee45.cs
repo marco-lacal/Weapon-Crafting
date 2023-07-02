@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Banshee45 : MonoBehaviour
 {
+    //min usually will equal 0 but can be set to something else to restrict the weapon drops
     [SerializeField] private int min;
     [SerializeField] private int numWeapons;
 
