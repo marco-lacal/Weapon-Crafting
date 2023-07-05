@@ -102,7 +102,7 @@ public class ADSShoot_State : WeaponBaseState
         WSM.DecreaseMag();
 
         RaycastHit hit;
-        if(Physics.Raycast(WSM.transform.position, WSM.transform.forward, out hit, 100 + WSM.Stats.ZoomFactor))
+        if(Physics.Raycast(WSM.transform.position, WSM.transform.forward, out hit, 100 + (WSM.Stats.ZoomFactor * 0.5f)))
         {
             if(hit.transform.gameObject.tag == "BodyShot")
             {
@@ -152,27 +152,23 @@ public class ADSShoot_State : WeaponBaseState
         //say one enemy has .75 body but 2.0 crit and another has 1 for both body and crit
         float damageMultiplier = isBody ? 1f : 1.5f;
 
-        Debug.Log(hit.transform.gameObject.name);
-
         float distance = Vector3.Distance(hit.point, WSM.transform.position);
 
         if(distance <= WSM.Stats.Range + (WSM.Stats.ZoomFactor * 0.5f))
         {
-            Debug.Log("Within range Damage: " + WSM.Stats.Damage);
-
             WSM.ShowDamageNumbers(hit, (WSM.Stats.Damage * damageMultiplier));
         }
         else
         {
             //example: range = 30, distance = 65
             float remainingDistance = 100 - WSM.Stats.Range + (WSM.Stats.ZoomFactor * 0.5f);
-            float distancePastRange = distance - WSM.Stats.Range;
+            float distancePastRange = distance - (WSM.Stats.Range + (WSM.Stats.ZoomFactor * 0.5f));
 
             float unroundedDamage = (WSM.Stats.Damage * ((remainingDistance - distancePastRange) / remainingDistance));
 
             float damage = Mathf.Round(unroundedDamage * 100.0f) / 100.0f;
 
-            Debug.Log("Outside range Damage: " + damage);
+            //Debug.Log("Range + ZoomFactor: " + (WSM.Stats.Range + (WSM.Stats.ZoomFactor * 0.5f)) + ", Distance: " + distance + ", rD: " + remainingDistance + ", dPR: " + distancePastRange + ", uD: " + unroundedDamage + ", damage: " + damage);
 
             WSM.ShowDamageNumbers(hit, (damage * damageMultiplier));
         }

@@ -150,7 +150,7 @@ public class HipFireShoot_State : WeaponBaseState
 
         if(distance <= WSM.Stats.Range)
         {
-            Debug.Log("Within range Damage: " + WSM.Stats.Damage);
+            //Debug.Log("Range: " + WSM.Stats.Range + ", Distance: " + distance);
             
             WSM.ShowDamageNumbers(hit, (WSM.Stats.Damage * damageMultiplier));
         }
@@ -164,7 +164,7 @@ public class HipFireShoot_State : WeaponBaseState
 
             float damage = Mathf.Round(unroundedDamage * 100.0f) / 100.0f;
 
-            Debug.Log("Outside range Damage: " + damage);
+            //Debug.Log("Range: " + WSM.Stats.Range + ", Distance: " + distance + ", rD: " + remainingDistance + ", dPR: " + distancePastRange + ", uD: " + unroundedDamage + ", damage: " + damage);
 
             WSM.ShowDamageNumbers(hit, (damage * damageMultiplier));
         }
