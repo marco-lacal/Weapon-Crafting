@@ -26,6 +26,9 @@ public class WeaponCrate : Interactable
     {
         base.Interact(temp);
 
+        //so that this interactable object isnt considered anymore
+        transform.gameObject.layer = 7;
+
         Destroy(padLock);
 
         //enable the BoxCollider that is normally disabled on the top of the crate

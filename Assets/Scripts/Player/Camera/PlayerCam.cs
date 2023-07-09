@@ -20,6 +20,11 @@ public class PlayerCam : MonoBehaviour
 
     private void Update()
     {
+        if(MenuTemplate.isPaused)
+        {
+            return;
+        }
+
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * sensX;
     	float mouseY = Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * sensY;
 

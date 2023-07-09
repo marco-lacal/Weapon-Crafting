@@ -82,6 +82,12 @@ public class WeaponStateManager : Subject
             return;
         }
 
+        // TEMPORARY FIX TO PREVENT PLAYER ACTIONS WHILE IN MENUS
+        if(Time.timeScale == 0f)
+        {
+            return;
+        }
+
         currState.UpdateState(this);
     }
 

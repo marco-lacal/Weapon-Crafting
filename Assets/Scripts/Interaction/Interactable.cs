@@ -42,7 +42,9 @@ public abstract class Interactable : MonoBehaviour
 
         DestroyPrompt();
 
-        //so that this interactable object isnt considered anymore
-        transform.gameObject.layer = 7;
+        //moved this line to individual children classes.
+
+        // //so that this interactable object isnt considered anymore
+        // transform.gameObject.layer = 7;
     }
 }

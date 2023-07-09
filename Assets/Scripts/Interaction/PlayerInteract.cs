@@ -21,6 +21,11 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Time.timeScale == 0f)
+        {
+            return;
+        }
+
         //raycast that will only collide with interactable objects on the eighth layer
         if(Physics.Raycast(transform.position, transform.forward, out hit, 3f, 1 << 8))
         {
