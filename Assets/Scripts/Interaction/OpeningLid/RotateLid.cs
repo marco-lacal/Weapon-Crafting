@@ -17,6 +17,11 @@ public class RotateLid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Time.timeScale == 0f)
+        {
+            return;
+        }
+
         if(active)
         {
             transform.parent.eulerAngles = new Vector3(transform.parent.eulerAngles.x, transform.parent.eulerAngles.y, transform.parent.eulerAngles.z - 0.1f);

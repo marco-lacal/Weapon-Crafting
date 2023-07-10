@@ -32,8 +32,15 @@ public class CraftingBench : Interactable
 
         base.Interact(temp);
 
-        //create instance of the crafting ui
-        instCraftingMenu = GameObject.Instantiate(craftingMenu, canvasRef);
+        if(instCraftingMenu == null)
+        {
+            //create instance of the crafting ui
+            instCraftingMenu = GameObject.Instantiate(craftingMenu, canvasRef);
+        }
+        else
+        {
+            instCraftingMenu.SetActive(true);
+        }
 
         hasBeenInteractedWith = false;
     }

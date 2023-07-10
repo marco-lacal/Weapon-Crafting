@@ -20,7 +20,7 @@ public class PlayerCam : MonoBehaviour
 
     private void Update()
     {
-        if(MenuTemplate.isPaused)
+        if(Time.timeScale == 0f)
         {
             return;
         }
