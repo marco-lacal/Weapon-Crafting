@@ -197,6 +197,7 @@ public class WeaponStateManager : Subject
 
         GetImportantReferences();
 
+        //can now get the parts list from Statsheet
         stats = wS;
         adsSpeed = 0.015f + ((float)Stats.Handling / 2222);
 

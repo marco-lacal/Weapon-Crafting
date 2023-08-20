@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 [CreateAssetMenu(menuName = "StatSheet")]
 public class StatSheet : ScriptableObject
@@ -23,6 +24,8 @@ public class StatSheet : ScriptableObject
 
     public string Name {get {return weaponName;} set {weaponName = value;}}
 
+    public int[] PartsList {get {return partsList; } set {partsList = value;}}
+
     [SerializeField] private int rateOfFire;
     [SerializeField] private int damage;
     [SerializeField] private int range;
@@ -33,6 +36,10 @@ public class StatSheet : ScriptableObject
     [SerializeField] private int magazine;
     [SerializeField] private int zoomFactor;
     [SerializeField] private int inventorySize;
+
+    //indices 0-5 refer to each part alphabetically (0 = Barrel; 1 = Body; etc). values range between 1 and the number of weapons of some type
+    //used in the reforge process that will need to access what parts are used
+    private int[] partsList;
     
     private int practicalMagazine;
 
@@ -44,6 +51,8 @@ public class StatSheet : ScriptableObject
     void Awake()
     {
         weaponName = "";
+
+        partsList = new int[6];
     }
 
     //on awake, create a List containing the stats

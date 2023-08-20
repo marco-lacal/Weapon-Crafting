@@ -21,9 +21,14 @@ public class Banshee45 : MonoBehaviour
     }
 
     //we take in the transform that will be the parent of all the weapon parts, then we return the relative position the body/weapon should be in when equipped
-    public Vector3 Creation(Transform weapon)
+    public Vector3 Creation(Transform weapon, int[] specificParts)
     {
-        int[] weaponParts = RandomNumbers();
+        int[] weaponParts = specificParts;
+
+        if(weaponParts == null)
+        {
+            weaponParts = RandomNumbers();
+        }
 
         //LOAD ALL THE PIECES FIRST
 
