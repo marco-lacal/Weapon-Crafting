@@ -61,12 +61,14 @@ public class WeaponPickup : Interactable
     void Awake()
     {
         //create gun
-        inherentPosition = transform.GetComponent<Banshee45>().Creation(transform);
+        inherentPosition = transform.GetComponent<Banshee45>().Creation(transform, null);
 
         Destroy(transform.GetComponent<Banshee45>());
 
         //create stats
         stats = transform.GetComponent<StatsCreation>().CalculateStats();
+
+        Destroy(transform.GetComponent<StatsCreation>());
 
         //USE THIS FOR TESTING LATER
         //PrintStats();

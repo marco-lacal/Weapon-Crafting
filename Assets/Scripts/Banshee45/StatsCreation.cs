@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,11 +23,17 @@ public class StatsCreation : MonoBehaviour
         //List of StatSheet to that will store the StatSheets of all gun parts
         List<StatSheet> parts = new List<StatSheet>();
 
+        int[] partsList = new int[6];
+
         //transform.childCount will always be 6
         for(int i = 0; i < transform.childCount; i++)
         {
             //get and add the StatSheet from each weaponpartbase to the list
             parts.Add(transform.GetChild(i).GetComponent<WeaponPartBase>().StatSheet);
+
+            //-7 for the string "(Clone)" and -1 to go to 0 based index
+            //Debug.Log(transform.GetChild(i).name[transform.GetChild(i).name.Length - 7 - 1] + "   " + transform.GetChild(i).name + "   " + transform.GetChild(i).name[transform.GetChild(i).name.Length - 7 - 1].GetType());
+            partsList[i] = (int) char.GetNumericValue(transform.GetChild(i).name[transform.GetChild(i).name.Length - 7 - 1]);
 
             // when index = 1, that is the Body we are looking at, so get the guns's name
             if(i == 1)
@@ -34,6 +41,8 @@ public class StatsCreation : MonoBehaviour
                 weaponStats.Name = transform.GetChild(i).GetComponent<Body>().Name;
             }
         }
+
+        weaponStats.PartsList = partsList;
 
         // Just in case :)
         if(parts.Count != 6)
