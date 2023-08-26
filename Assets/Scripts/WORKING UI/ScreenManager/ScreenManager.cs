@@ -49,6 +49,9 @@ public class ScreenManager : MonoBehaviour
         {
             Debug.Log("Pause game");
             Time.timeScale = 0f;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         currScreen = Instantiate(newScreen, transform);
