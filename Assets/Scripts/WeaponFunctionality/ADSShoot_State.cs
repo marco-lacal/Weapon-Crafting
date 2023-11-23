@@ -31,7 +31,7 @@ public class ADSShoot_State : WeaponBaseState
     public override void UpdateState(WeaponStateManager WSM)
     {
         weapon.localPosition = Vector3.Lerp(weapon.localPosition, ADS, WSM.ADSSpeed);
-        WSM.Notify(ZoomAction.In, WSM.Stats.ZoomFactor, WSM.ADSSpeed);
+        WSM.ZoomIn(WSM.Stats.ZoomFactor, WSM.ADSSpeed);
 
         //Shoot function
         if(WSM.Stats.PracticalMagazine >= 1 && WSM.LastShot <= Time.time)
@@ -97,6 +97,7 @@ public class ADSShoot_State : WeaponBaseState
         WSM.PlayGunShot();
         WSM.EquippedWeapon.localPosition -= Vector3.forward * 0.05f;
         WSM.AddRecoil(true, WSM.transform.eulerAngles);
+        WSM.NotifyShoot();
 
         WSM.DetermineNextShot();
         WSM.DecreaseMag();

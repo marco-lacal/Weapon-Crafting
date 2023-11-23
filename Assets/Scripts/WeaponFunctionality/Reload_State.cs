@@ -15,7 +15,7 @@ public class Reload_State : WeaponBaseState
 
         if(reloadSpeed != WSM.Stats.ReloadSpeed)
         {
-            reloadSpeed = 4 - (((float)WSM.Stats.ReloadSpeed/100) * 3);
+            reloadSpeed = 4 - ((float)WSM.Stats.ReloadSpeed/100 * 3);
 
             currentTimer = 0;
         }
@@ -30,7 +30,7 @@ public class Reload_State : WeaponBaseState
     public override void UpdateState(WeaponStateManager WSM)
     {
         WSM.EquippedWeapon.localPosition = Vector3.Lerp(WSM.EquippedWeapon.localPosition, WSM.HF, WSM.ADSSpeed);
-        WSM.Notify(ZoomAction.Out, WSM.Stats.ZoomFactor, WSM.ADSSpeed);
+        WSM.ZoomOut(WSM.ADSSpeed);
         currentTimer += Time.deltaTime;
         //Debug.Log(currentTimer);
 

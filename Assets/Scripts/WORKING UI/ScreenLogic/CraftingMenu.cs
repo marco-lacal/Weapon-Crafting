@@ -17,7 +17,7 @@ public class CraftingMenu : MonoBehaviour
 
     public void ReforgeButton()
     {
-        if(ScreenManager.Instance.EquippedWeapon == null)
+        if(ScreenManager.Instance.WSM.GetComponent<WeaponStateManager>().EquippedWeapon == null)
         {
             noWeaponEquippedGO.GetComponent<NoWeaponEquippedIcon>().ActivateIcon();
             return;

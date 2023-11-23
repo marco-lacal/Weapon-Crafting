@@ -1820,6 +1820,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prompt: {fileID: 8302886321653392410, guid: ec30577090a18c84d9c9caec1af723c7, type: 3}
   hasBeenInteractedWith: 0
+  craftingMenu: {fileID: 8683555895945956513, guid: ea566a9b15ad6884c8da726767f11840,
+    type: 3}
 --- !u!64 &3736281291025095391
 MeshCollider:
   m_ObjectHideFlags: 0

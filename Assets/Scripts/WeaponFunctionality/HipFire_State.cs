@@ -30,7 +30,7 @@ public class HipFire_State : WeaponBaseState
     public override void UpdateState(WeaponStateManager WSM)
     {
         weapon.localPosition = Vector3.Lerp(weapon.localPosition, HF, WSM.ADSSpeed);
-        WSM.Notify(ZoomAction.Out, WSM.Stats.ZoomFactor, WSM.ADSSpeed);
+        WSM.ZoomOut(WSM.ADSSpeed);
         lerpPercentage = weapon.localPosition.magnitude / HF.magnitude;
         // Debug.Log("0.98f " + (lerpPercentage > 0.98f));
         // Debug.Log("0.995f " + (lerpPercentage > 0.995f));

@@ -34,7 +34,7 @@ public class HipFireShoot_State : WeaponBaseState
     {
         //the lerping of camera back to correct location
         weapon.localPosition = Vector3.Lerp(weapon.localPosition, HF, WSM.ADSSpeed);
-        WSM.Notify(ZoomAction.Out, WSM.Stats.ZoomFactor, WSM.ADSSpeed);
+        WSM.ZoomOut(WSM.ADSSpeed);
 
         //Shoot function
         if(WSM.Stats.PracticalMagazine >= 1 && WSM.LastShot <= Time.time)
@@ -90,6 +90,7 @@ public class HipFireShoot_State : WeaponBaseState
         WSM.PlayGunShot();
         WSM.EquippedWeapon.localPosition -= Vector3.forward * 0.1f; //higher rate of fire should have smaller number
         WSM.AddRecoil(false, WSM.transform.eulerAngles);
+        WSM.NotifyShoot();
 
         WSM.DetermineNextShot();
         WSM.DecreaseMag();

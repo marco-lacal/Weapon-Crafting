@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHUD : MonoBehaviour
+public class PlayerHUD : MonoBehaviour, EquipObserver, ShootObserver, ReloadObserver, ZoomObserver
 {
     [Header("Next Screen")]
     [SerializeField] private GameObject nextScreen;
@@ -17,35 +19,84 @@ public class PlayerHUD : MonoBehaviour
     [Header("Array of Weapon Icons")]
     [SerializeField] private GameObject[] weaponIcons;
 
-    void Awake()
+    [Header("Ammo Text")]
+    [SerializeField] private TextMeshProUGUI ammo;
+
+    private int currMag;
+    private int currInventory;
+
+    void OnEnable()
     {
-        //for later
-        if(ScreenManager.Instance.EquippedWeapon != null)
+        // Don't think I will need this but keep it until im sure
+        // if(ScreenManager.Instance.EquippedWeapon != null)
+        // {
+        //     SetWeaponReticle();
+        //     ActivateWeaponIcons();
+        // }
+
+        // Potential implementation that would allow me to not manually add each addobserver and removeobserver. However, requires changes to WSMSubject so do this later
+
+        // var temp = GetType().GetInterfaces();
+        // foreach(var ass in temp)
+        // {
+        //     if (ass.IsAssignableFrom(typeof(WSMObserver)))
+        //     {
+        //         Debug.Log(ass);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("This is not derived from WSMObserver: " + ass);
+        //     }
+        // }
+
+        ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddEObserver((EquipObserver)this);
+        ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddSObserver((ShootObserver)this);
+        ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddRObserver((ReloadObserver)this);
+        ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddZObserver((ZoomObserver)this);
+
+        if(ScreenManager.Instance.WSM.GetComponent<WeaponStateManager>().EquippedWeapon != null)
         {
             SetWeaponReticle();
             ActivateWeaponIcons();
+
+            SetAmmoCounts(ScreenManager.Instance.WSM.GetComponent<WeaponStateManager>().Stats);
+        }
+    }
+
+    void OnDisable()
+    {
+        if(this != null && ScreenManager.Instance.WSM != null)
+        {
+            ScreenManager.Instance.WSM.GetComponent<WSMSubject>().RemoveEObserver((EquipObserver)this);
+            ScreenManager.Instance.WSM.GetComponent<WSMSubject>().RemoveSObserver((ShootObserver)this);
+            ScreenManager.Instance.WSM.GetComponent<WSMSubject>().RemoveRObserver((ReloadObserver)this);
+            ScreenManager.Instance.WSM.GetComponent<WSMSubject>().RemoveZObserver((ZoomObserver)this);
+        }
+        else
+        {
+            Debug.Log(this + " , " + ScreenManager.Instance.WSM);
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        //equipped weapon
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            SetWeaponReticle();
-            ActivateWeaponIcons();
-        }
-        else if(Input.GetKeyDown(KeyCode.G))
-        {
-            ResetReticle();
-            DeactivateWeaponIcons();
-        }
-        else if(Input.GetKeyDown(KeyCode.Q))
-        {
-            ScreenManager.Instance.Push(nextScreen);
-        }
-    }
+    // void Update()
+    // {
+    //     //equipped weapon
+    //     if(Input.GetKeyDown(KeyCode.E))
+    //     {
+    //         SetWeaponReticle();
+    //         ActivateWeaponIcons();
+    //     }
+    //     else if(Input.GetKeyDown(KeyCode.G))
+    //     {
+    //         ResetReticle();
+    //         DeactivateWeaponIcons();
+    //     }
+    //     else if(Input.GetKeyDown(KeyCode.Q))
+    //     {
+    //         ScreenManager.Instance.Push(nextScreen);
+    //     }
+    // }
 
     private void SetWeaponReticle()
     {
@@ -73,5 +124,62 @@ public class PlayerHUD : MonoBehaviour
         {
             go.SetActive(false);
         }
+    }
+
+    private void SetAmmoCounts(StatSheet stats)
+    {
+        currMag = stats.PracticalMagazine;
+        currInventory = stats.InventorySize;
+
+        ammo.text = currMag + " / " + stats.InventorySize;
+    }
+
+    public void OnNotify_Equip(StatSheet stats)
+    {
+        SetWeaponReticle();
+        ActivateWeaponIcons();
+
+        SetAmmoCounts(stats);
+    }
+
+    public void OnNotify_Unequip()
+    {
+        Debug.Log("Hello from OnNotify_Unequip");
+
+        ResetReticle();
+        DeactivateWeaponIcons();
+    }
+
+    public void OnNotify_Shoot()
+    {
+        currMag--;
+
+        ammo.text = currMag + " / " + currInventory;
+    }
+
+    public void OnNotify_ShootRecoil(int stability, int recoilControl, WeaponType firingType, bool isADS){}
+
+    public void OnNotify_Reload(StatSheet stats)
+    {
+        SetAmmoCounts(stats);
+    }
+
+    //FINISH WORKING ON THE FADING RETICLE ON ZOOM IN
+
+    public void OnNotify_ZoomIn(int zoom, float adsSpeed)
+    {
+        // float newAlpha = instWeaponReticle.GetComponent<CanvasGroup>().alpha;
+        // newAlpha = Mathf.Lerp(newAlpha, 0, adsSpeed * 2);
+
+        // instWeaponReticle.GetComponent<CanvasGroup>().alpha = newAlpha;
+    }
+
+    public void OnNotify_ZoomOut(float adsSpeed)
+    {
+        // Debug.Log("HELLO");
+        // float newAlpha = instWeaponReticle.GetComponent<CanvasGroup>().alpha;
+        // newAlpha = Mathf.Lerp(newAlpha, 1, adsSpeed * 0.5f);
+
+        // instWeaponReticle.GetComponent<CanvasGroup>().alpha = newAlpha;
     }
 }

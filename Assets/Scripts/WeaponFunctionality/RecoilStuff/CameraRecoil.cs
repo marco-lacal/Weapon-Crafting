@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// OLD RECOIL SYSTEM WITH DELEGATE EVENTS: didn't really understand it that well when I made it so I'm converting it to an observer pattern
+
 public class CameraRecoil : MonoBehaviour
 {
     private Vector3 finalRotation;
@@ -48,7 +50,7 @@ public class CameraRecoil : MonoBehaviour
 
         if(finalRotation == Vector3.zero)
         {
-            //Debug.Log("starting " + starting);
+            Debug.Log("starting " + starting);
             finalRotation = starting;
         }
 

@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //just gonna use a singleton for now because trying to figure out another way with events and delegates is making my head spin and i want to have something done
-
 public class ScreenManager : MonoBehaviour
 {
     public static ScreenManager Instance {get; private set;}
     public PartsCollector parts {get{return pC;}}
-    public Transform EquippedWeapon {get {return equippedWeapon;}}
 
-    //This will be used when this system is implemented into current Weapon Crafting. Since both screen manager and weapon holder will have to exist in a scene
-    // before runtime, i will just give a pointer to the weapon holder then either replace it with the equippedWeapon transform in WSM or reference it through WSM
-    [SerializeField] private Transform equippedWeapon;
+    //delete these
+
+    public Transform WSM {get {return weaponHolder;}}
+
+    //Have a reference to the always persistent WeaponHolder. Need to get two things from the WeaponHolder: WSMSubject for events; equippedWeapon from WSM for the screens
+    [SerializeField] private Transform weaponHolder;
     [SerializeField] private GameObject playerHUD;
     [SerializeField] private PartsCollector pC;
 
@@ -40,10 +41,12 @@ public class ScreenManager : MonoBehaviour
     {
         if(currScreen != null)
         {
+            Debug.Log(currScreen.name);
             Destroy(currScreen);
         }
 
         stack.Push(newScreen);
+        Debug.Log("Stack count: " + stack.Count);
 
         if(Time.timeScale != 0f && stack.Count >= 2)
         {
@@ -70,12 +73,16 @@ public class ScreenManager : MonoBehaviour
         }
 
         stack.Pop();
+        Debug.Log("Stack count: " + stack.Count);
         currScreen = Instantiate(stack.Peek(), transform);
 
-        if(stack.Count < 2)
+        if(stack.Count == 1)
         {
             Debug.Log("Unpause game");
             Time.timeScale = 1f;
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }

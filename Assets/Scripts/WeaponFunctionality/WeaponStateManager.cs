@@ -14,7 +14,7 @@ public enum ZoomAction
 //The weaponstatemanager derives from Subject so that it can access camera observers,
 //as well as have access to Monobehaviour stuff. We do this so that we dont make the ADS and HF
 //states inherit Subject and thus take on all of Monbehaviour.
-public class WeaponStateManager : Subject
+public class WeaponStateManager : WSMSubject
 {
     public Transform EquippedWeapon {get {return equippedWeapon;}}
     public StatSheet Stats {get {return stats;}}
@@ -60,18 +60,7 @@ public class WeaponStateManager : Subject
 
     void Start()
     {
-        recoilManager = GetComponent<RecoilEventManager>();
-    }
-
-    //not used anywhere
-    public void Notify()
-    {
-        NotifyObservers();
-    }
-
-    public void Notify(ZoomAction type, int zoomFactor, float speed)
-    {
-        NotifyObservers(type, zoomFactor, speed);
+        // recoilManager = GetComponent<RecoilEventManager>();
     }
 
     // Update is called once per frame
@@ -87,6 +76,8 @@ public class WeaponStateManager : Subject
         {
             return;
         }
+
+        //Debug.Log(currState);
 
         currState.UpdateState(this);
     }
@@ -112,6 +103,8 @@ public class WeaponStateManager : Subject
         equippedWeapon.GetComponent<Rigidbody>().AddForce(transform.forward * 5, ForceMode.Impulse);
 
         equippedWeapon = null;
+
+        Unequip();
     }
 
     //Helper functions that will be called within the different states
@@ -134,6 +127,7 @@ public class WeaponStateManager : Subject
             stats.InventorySize = 0;
         }
         
+        ReloadUI(stats);
     }
 
     public void DecreaseMag()
@@ -157,7 +151,8 @@ public class WeaponStateManager : Subject
 
     public void AddRecoil(bool isADS, Vector3 startingEulerAngles)
     {
-        recoilManager.OnShoot(stats, firingType, isADS, startingEulerAngles);
+        //recoilManager.OnShoot(stats, firingType, isADS, startingEulerAngles);
+        Notify_ShootRecoil(stats.Stability, stats.RecoilControl, firingType, isADS);
     }
 
     //try changing the prefab gameObject to just being a texture object so having multiple of them isnt too taxing
@@ -208,6 +203,8 @@ public class WeaponStateManager : Subject
             gunshotSource.clip = gunshotClip;
             gunshotSource.volume = 0.3f;
         }
+
+        Equip(stats);
         
         currState = HipFire;
         currState.EnterState(this);
@@ -229,4 +226,41 @@ public class WeaponStateManager : Subject
         - CREATE STATSHEET FOR THE WEAPONSTATEMANAGER THAT WILL BE SET TO EQUAL TO SUM OF ALL PARTS
         - NO STATSHEET, INSTEAD JUST HAVE 9 VARIABLES FOR EACH STAT IN THE STATE MANAGER
     */
+
+    //All Observer Notify Calls
+
+    public void Equip(StatSheet stats)
+    {
+        Notify_Equip(stats);
+    }
+
+    public void Unequip()
+    {
+        Notify_Unequip();
+    }
+
+    public void NotifyShoot()
+    {
+        Notify_Shoot();
+    }
+
+    public void NotifyShootRecoil(int stability, int recoilControl, WeaponType firingType, bool isADS)
+    {
+        Notify_ShootRecoil(stability, recoilControl, firingType, isADS);
+    }
+
+    public void ZoomIn(int zoomFactor, float adsSpeed)
+    {
+        Notify_ZoomIn(zoomFactor, adsSpeed);
+    }
+
+    public void ZoomOut(float adsSpeed)
+    {
+        Notify_ZoomOut(adsSpeed);
+    }
+
+    public void ReloadUI(StatSheet stats)
+    {
+        Notify_Reload(stats);
+    }
 }

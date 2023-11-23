@@ -6,7 +6,7 @@ public class CraftingBench : Interactable
 {
     [SerializeField] private GameObject craftingMenu;
 
-    private GameObject instCraftingMenu;
+    // private GameObject instCraftingMenu;
 
     private Transform canvasRef;
 
@@ -28,19 +28,19 @@ public class CraftingBench : Interactable
 
     public override void Interact(Transform temp)
     {
-        Debug.Log(temp);
-
         base.Interact(temp);
 
-        if(instCraftingMenu == null)
-        {
-            //create instance of the crafting ui
-            instCraftingMenu = GameObject.Instantiate(craftingMenu, canvasRef);
-        }
-        else
-        {
-            instCraftingMenu.SetActive(true);
-        }
+        // if(instCraftingMenu == null)
+        // {
+        //     //create instance of the crafting ui
+        //     instCraftingMenu = GameObject.Instantiate(craftingMenu, canvasRef);
+        // }
+        // else
+        // {
+        //     instCraftingMenu.SetActive(true);
+        // }
+
+        ScreenManager.Instance.Push(craftingMenu);
 
         hasBeenInteractedWith = false;
     }

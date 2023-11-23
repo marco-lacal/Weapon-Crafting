@@ -32,7 +32,7 @@ public class ADS_State : WeaponBaseState
     public override void UpdateState(WeaponStateManager WSM)
     {
         weapon.localPosition = Vector3.Lerp(weapon.localPosition, ADS, WSM.ADSSpeed);
-        WSM.Notify(ZoomAction.In, WSM.Stats.ZoomFactor, WSM.ADSSpeed);
+        WSM.ZoomIn(WSM.Stats.ZoomFactor, WSM.ADSSpeed);
         
         //create events that contact cameras to zoom in
 
