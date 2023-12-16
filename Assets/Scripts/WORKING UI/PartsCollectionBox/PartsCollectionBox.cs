@@ -71,8 +71,6 @@ public class PartsCollectionBox : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Hello");
-
         if(fading != null)
         {
             StopCoroutine(fading);

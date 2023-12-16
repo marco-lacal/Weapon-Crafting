@@ -21,14 +21,14 @@ public class BaseCrafting : MonoBehaviour
         {
             partsCollection = ScreenManager.Instance.parts.AllParts[weaponTypeID];
 
+            Debug.Log(partsCollection.Length + "  " + partsCollection[0].Length);
+
             SetCollection?.Invoke(partsCollection);
         }
     }
 
     public void OnHelpIconClicked()
     {
-        Debug.Log("hello");
-
         PartsCollectionBox.gameObject.SetActive(true);
     }
 

@@ -56,6 +56,13 @@ public abstract class WSMSubject : MonoBehaviour
         });
     }
 
+    protected void Notify_Equip_NewParts(int[] weaponParts)
+    {
+        equipObservers.ForEach((equipObservers) => {
+            equipObservers.OnNotify_EquipParts(weaponParts);
+        });
+    }
+
     protected void Notify_Unequip()
     {
         equipObservers.ForEach((equipObservers) => {

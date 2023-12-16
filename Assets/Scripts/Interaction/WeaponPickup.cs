@@ -54,6 +54,9 @@ public class WeaponPickup : Interactable
 
     private StatSheet stats;
 
+    // Need to store them for PartsCollector to populate crafting menus
+    private int[] weaponParts;
+
     //an additional prompt prefab for the weapon stats display
     [SerializeField] private GameObject prefabSheet;
     private GameObject instSheet;
@@ -62,6 +65,8 @@ public class WeaponPickup : Interactable
     {
         //create gun
         inherentPosition = transform.GetComponent<Banshee45>().Creation(transform, null);
+
+        weaponParts = transform.GetComponent<Banshee45>().WeaponParts;
 
         Destroy(transform.GetComponent<Banshee45>());
 
@@ -158,7 +163,7 @@ public class WeaponPickup : Interactable
         transform.rotation = weaponHolder.rotation;
         transform.localPosition = inherentPosition;
 
-        weaponHolder.GetComponent<WeaponStateManager>().SetEquippedWeaponAndStats(transform, stats);
+        weaponHolder.GetComponent<WeaponStateManager>().SetEquippedWeaponAndStats(transform, stats, weaponParts);
 
         //Destroy(transform.gameObject);
 

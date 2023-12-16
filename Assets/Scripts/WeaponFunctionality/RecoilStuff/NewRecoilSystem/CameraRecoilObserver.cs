@@ -11,24 +11,28 @@ public class CameraRecoilObserver : MonoBehaviour, ShootObserver, EquipObserver
     private Vector3 currentRotation;
     private Vector3 targetRotation;
 
-    void OnEnable()
-    {
-        if(this != null && ScreenManager.Instance != null)
-        {
-            ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddSObserver((ShootObserver)this);
-        }
-    }
+    // Unnecessary. Should only be added to the list of ShootObservers if we have a gun
+
+    // void OnEnable()
+    // {
+    //     if(this != null && ScreenManager.Instance != null)
+    //     {
+    //         Debug.Log("HEllo");
+    //         ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddSObserver((ShootObserver)this);
+    //     }
+    // }
 
     void OnDisable()
     {
         OnNotify_Unequip();
+        ScreenManager.Instance.WSM.GetComponent<WSMSubject>().RemoveSObserver((ShootObserver)this);
     }
 
     void Start()
     {
         if(this != null && ScreenManager.Instance.WSM != null)
         {
-            ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddSObserver((ShootObserver)this);
+            ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddEObserver((EquipObserver)this);
         }
     }
 
@@ -87,8 +91,11 @@ public class CameraRecoilObserver : MonoBehaviour, ShootObserver, EquipObserver
 
     public void OnNotify_Equip(StatSheet stats)
     {
+        Debug.Log("Hello again");
         ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddSObserver((ShootObserver)this);
     }
+
+    public void OnNotify_EquipParts(int[] weaponParts){}
 
     public void OnNotify_Unequip()
     {

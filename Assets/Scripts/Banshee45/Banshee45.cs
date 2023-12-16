@@ -7,6 +7,8 @@ public class Banshee45 : MonoBehaviour
     //min usually will equal 0 but can be set to something else to restrict the weapon drops
     [SerializeField] private int min;
     [SerializeField] private int numWeapons;
+    private int[] weaponParts;
+    public int[] WeaponParts {get {return weaponParts;} }
 
     public int[] RandomNumbers()
     {
@@ -23,7 +25,7 @@ public class Banshee45 : MonoBehaviour
     //we take in the transform that will be the parent of all the weapon parts, then we return the relative position the body/weapon should be in when equipped
     public Vector3 Creation(Transform weapon, int[] specificParts)
     {
-        int[] weaponParts = specificParts;
+        weaponParts = specificParts;
 
         if(weaponParts == null)
         {
