@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ public enum SelectionType
     Rifle,
     SMG,
     Pistol,
-    Melee
+    Sword
 }
 
 public class CraftingScreen : MonoBehaviour
@@ -35,6 +36,24 @@ public class CraftingScreen : MonoBehaviour
         Debug.Log(descriptionText);
     }
 
+    // public void OnOptionClick(Transform buttonPressed)
+    // {
+    //     if(!isButtonPressed)
+    //     {
+    //         isButtonPressed = true;
+
+    //         descriptionObject.gameObject.SetActive(true);
+    //         craftButton.gameObject.SetActive(true);
+    //     }
+
+    //     descriptionObject.GetComponent<Image>().color = buttonPressed.gameObject.GetComponent<Image>().color;
+    //     craftButton.GetComponent<Image>().color = buttonPressed.gameObject.GetComponent<Image>().color;
+
+    //     selectedOption = buttonPressed.name.Replace("Button", "");
+
+    //     descriptionText.text = "Completed " + selectedOption + " Frames: x <br><br> Total " + selectedOption + " Parts: " + ScreenManager.Instance.GetComponent<PartsCollector>().GetIndexedParts((SelectionType)selectedOption);
+    // }
+
     public void OnOptionClick(Transform buttonPressed)
     {
         if(!isButtonPressed)
@@ -50,7 +69,10 @@ public class CraftingScreen : MonoBehaviour
 
         selectedOption = buttonPressed.name.Replace("Button", "");
 
-        descriptionText.text = "Completed " + selectedOption + " Frames: x <br><br> Total " + selectedOption + " Parts: y";
+        descriptionText.text = "Completed " + selectedOption + " Frames: " + 
+                                ScreenManager.Instance.parts.GetCompletePatterns((int)Enum.Parse<SelectionType>(selectedOption)) 
+                                + " <br><br> Total " + selectedOption + " Parts: " + 
+                                ScreenManager.Instance.parts.GetIndexedParts((int)Enum.Parse<SelectionType>(selectedOption));
     }
 
     public void OnCraftClick()

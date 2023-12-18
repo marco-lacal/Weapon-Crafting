@@ -144,7 +144,7 @@ public class PlayerHUD : MonoBehaviour, EquipObserver, ShootObserver, ReloadObse
 
     // Have the PlayerHUD pop up a message with a list of the new parts collected
     // NVM: dont think this is currently possible because have no way to send list of new parts from PartsCollector to here
-    public void OnNotify_EquipParts(int[] weaponParts)
+    public void OnNotify_EquipParts(int[] weaponParts, int weaponType)
     {
 
     }

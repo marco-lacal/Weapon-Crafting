@@ -181,7 +181,7 @@ public class WeaponStateManager : WSMSubject
 
     // 12/14/2023: update this function to take in int array which contains weapon number of each part.
     // needed for the PartsCollector to update collected parts list
-    public void SetEquippedWeaponAndStats(Transform weapon, StatSheet wS, int[] weaponParts)
+    public void SetEquippedWeaponAndStats(Transform weapon, StatSheet wS, int[] weaponParts, int weaponType)
     {
         //will replace this with weaponpickups / drops
         if(equippedWeapon != null)
@@ -209,7 +209,7 @@ public class WeaponStateManager : WSMSubject
         Equip(stats);
 
         // Call PartsCollector here with weaponParts
-        GetNewParts(weaponParts);
+        GetNewParts(weaponParts, weaponType);
         
         currState = HipFire;
         currState.EnterState(this);
@@ -239,9 +239,9 @@ public class WeaponStateManager : WSMSubject
         Notify_Equip(stats);
     }
 
-    public void GetNewParts(int[] weaponParts)
+    public void GetNewParts(int[] weaponParts, int weaponType)
     {
-        Notify_Equip_NewParts(weaponParts);
+        Notify_Equip_NewParts(weaponParts, weaponType);
     }
 
     public void Unequip()

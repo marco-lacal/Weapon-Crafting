@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class PartsCollector : MonoBehaviour, EquipObserver
 {
-    public List<int[][]> AllParts {get{return allParts;}}
-
     private int[][] rifleParts;
     private int[][] smgParts;
     private int[][] pistolParts;
     private int[][] swordParts;
 
-    private List<int[][]> allParts;
+    // private List<int[][]> allParts;
 
     [SerializeField] private int numRifles;
     [SerializeField] private int numSMGs;
@@ -23,43 +21,104 @@ public class PartsCollector : MonoBehaviour, EquipObserver
     [SerializeField] private int numPistolParts;
     [SerializeField] private int numSwordParts;
 
+    // Stores the number of parts collected for each weapon type. 
+    // Number of parts for the i-th index weapon is PartsCollection[i]
+    // 0 : RifleParts   1 : SMGParts    2 : PistolParts     3 : SwordParts
+    private int[] PartsCollection = new int[4];
+
+    // Stores the number of complete weapon patterns for each weapon type.
+    // Number of complete weapon patterns for the ith weapon is CompleteWeaponsCollection[i]
+    // 0 : RifleParts   1 : SMGParts    2 : PistolParts     3 : SwordParts
+    private int[] CompleteWeaponsCollection = new int[4];
+
+    public int GetIndexedParts(int weaponType)
+    {
+        return PartsCollection[weaponType];
+    }
+
+    public int GetCompletePatterns(int weaponType)
+    {
+        return CompleteWeaponsCollection[weaponType];
+    }
+
+    public int[][] GetPartsArray(int weaponType)
+    {
+        int[][] partsArray = rifleParts;
+
+        switch(weaponType)
+        {
+            case 0:
+                // already set to rifleParts
+                break;
+            case 1:
+                partsArray = smgParts;
+                break;
+            case 2:
+                partsArray = pistolParts;
+                break;
+            case 3:
+                partsArray = swordParts;
+                break;
+        }
+
+        return partsArray;
+    }
+
     void Start()
     {
-        rifleParts = new int[numRifleParts][];
+        /*
+            Add 1 more row to each 2D array to store a int flag (0/1)
+            Will determine if all parts associated with a particular weapon pattern are collected
 
-        for(int i = 0; i < numRifleParts; i++)
+            I.E. Rifle:          |  0  |  1  |  2  |  ...
+            0 BAR                |  1  |  0  |  1  |
+            1 BOD                |  1  |  0  |  1  |
+            2 GRI                |  1  |  1  |  1  |
+            3 MAG                |  1  |  1  |  0  |
+            4 SCO                |  1  |  0  |  1  |
+            5 STO                |  1  |  1  |  1  |
+            6 CompletePattern    |  1  |  0  |  0  |
+
+            Will be used for the weapon crafting screens that will display:
+            1) Number of completed frames present
+            2) Number of collected parts (PartsCollection)
+        */
+
+        rifleParts = new int[numRifleParts + 1][];
+
+        for(int i = 0; i < rifleParts.Length; i++)
         {
             rifleParts[i] = new int[numRifles];
         }
 
-        smgParts = new int[numSMGParts][];
+        smgParts = new int[numSMGParts + 1][];
 
-        for(int i = 0; i < numSMGParts; i++)
+        for(int i = 0; i < smgParts.Length; i++)
         {
             smgParts[i] = new int[numSMGs];
         }
 
-        pistolParts = new int[numPistolParts][];
+        pistolParts = new int[numPistolParts + 1][];
 
-        for(int i = 0; i < numPistolParts; i++)
+        for(int i = 0; i < pistolParts.Length; i++)
         {
             pistolParts[i] = new int[numPistols];
         }
 
-        swordParts = new int[numSwordParts][];
+        swordParts = new int[numSwordParts + 1][];
 
-        for(int i = 0; i < numSwordParts; i++)
+        for(int i = 0; i < swordParts.Length; i++)
         {
             swordParts[i] = new int[numSwords];
         }
 
-        allParts = new List<int[][]>
-        {
-            rifleParts,
-            smgParts,
-            pistolParts,
-            swordParts
-        };
+        // allParts = new List<int[][]>
+        // {
+        //     rifleParts,
+        //     smgParts,
+        //     pistolParts,
+        //     swordParts
+        // };
 
         Debug.Log(ScreenManager.Instance);
         ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddEObserver((EquipObserver)this);
@@ -77,41 +136,74 @@ public class PartsCollector : MonoBehaviour, EquipObserver
         if(ScreenManager.Instance != null) ScreenManager.Instance.WSM.GetComponent<WSMSubject>().RemoveEObserver((EquipObserver)this);
     }
 
-    private void PickupNewWeapon()
-    {
-        
-    }
-
-    public int[] GetSpecificRow(int typeID, int partID)
-    {
-        return allParts[typeID][partID];
-    }
+    // public int[] GetSpecificRow(int typeID, int partID)
+    // {
+    //     return allParts[typeID][partID];
+    // }
 
     public void OnNotify_Equip(StatSheet stats){}
 
     public void OnNotify_Unequip(){}
 
-    public void OnNotify_EquipParts(int[] weaponParts /*, int weaponType*/)
+    public void OnNotify_EquipParts(int[] weaponParts , int weaponType)
     {
-        Debug.Log("HELLO");
-
         // for(int i = 0; i < weaponParts.Length; i++)
         // {
-        //     // for now gonna hard code to rifleParts but next will add a int to determine the correct list of parts to add to
-        //     rifleParts[i][weaponParts[i]] = 1;
+        //     Debug.Log(weaponParts[i]);
         // }
 
-        for(int i = 0; i < weaponParts.Length; i++)
-        {
-            Debug.Log(weaponParts[i]);
-        }
+        // Debug.Log(rifleParts.Length + "  " + rifleParts[0].Length + "  " + weaponParts.Length);
 
-        Debug.Log(rifleParts.Length + "  " + rifleParts[0].Length + "  " + weaponParts.Length);
+        int[][] partsArray = GetPartsArray(weaponType);
 
         for(int i = 0; i < weaponParts.Length; i++)
         {
             // - 1 because weapon parts are 1-based indexing not 0-based
-            rifleParts[i][weaponParts[i] - 1] = 1;
+            if(partsArray[i][weaponParts[i] - 1] == 0)
+            {
+                partsArray[i][weaponParts[i] - 1] = 1;
+                PartsCollection[weaponType]++;  // Update the count of individual parts found
+
+                // Check if the weapon pattern this part belongs to is complete (last row contains these values)
+                // If not ( == 0), then loop through that weapon's parts. If any part is 0, dont continue
+                // If all parts are == 1, then change 3rd dimension to 1 to indicate complete weapon
+                if(partsArray[6][weaponParts[i] - 1] == 0)
+                {
+                    int counter = 0;
+
+                    for(int j = 0; j < partsArray.Length - 1; j++)
+                    {
+                        if(partsArray[j][weaponParts[i] - 1] == 0)
+                        {
+                            // The jth part of weapon i-1 hasn't been collected yet
+                            break;
+                        }
+
+                        counter++;
+                    }
+
+                    if(counter == partsArray.Length - 1)
+                    {
+                        Debug.Log("COMPLETED WEAPON " + weaponParts[i]);
+                        partsArray[6][weaponParts[i] - 1] = 1;
+                        CompleteWeaponsCollection[weaponType]++;    // Update the count of complete weapon patterns
+                    }
+                }
+                // Else: do nothing
+            }
         }
+
+        // Debug.Log("PRINT EVERYTHING");
+
+        // for(int i = 0; i < partsArray.Length; i++)
+        // {
+        //     string print = i.ToString() + "== ";
+        //     for(int j = 0; j < partsArray[0].Length; j++)
+        //     {
+        //         print += j + ": " + partsArray[i][j] + ", ";
+        //     }
+
+        //     Debug.Log(print);
+        // }
     }
 }

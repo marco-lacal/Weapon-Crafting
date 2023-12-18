@@ -5,7 +5,7 @@ public interface EquipObserver : WSMObserver
     public void OnNotify_Equip(StatSheet stats);
 
     // Used for PartsCollector
-    public void OnNotify_EquipParts(int[] weaponParts);
+    public void OnNotify_EquipParts(int[] weaponParts, int weaponType);
 
     public void OnNotify_Unequip();
 }

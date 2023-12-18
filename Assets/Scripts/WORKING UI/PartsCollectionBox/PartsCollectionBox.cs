@@ -47,7 +47,7 @@ public class PartsCollectionBox : MonoBehaviour, IPointerEnterHandler, IPointerE
         {
             Transform basePlate = WPSList[i].transform.GetChild(1);
             
-            for(int j = 0; j < partsCollection.Length; j++)
+            for(int j = 0; j < partsCollection.Length - 1; j++)
             {
                 basePlate.GetChild(j).gameObject.SetActive(partsCollection[j][i] == 0 ?  false : true);
             }

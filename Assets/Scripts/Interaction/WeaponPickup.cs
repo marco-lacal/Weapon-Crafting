@@ -3,52 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponPickup : Interactable
-{
-    // private Vector3 inherentPosition;
-
-    // private Transform weapon;
-
-    // void Awake()
-    // {
-    //     Debug.Log("Hello from the WeaponPickup Script");
-
-    //     weapon = transform.GetChild(0);
-
-    //     weapon.GetComponent<Banshee45>().Creation(weapon);
-
-    //     weapon.GetComponent<StatsCreation>().CalculateStats();
-
-    //     //this is the correct location vector3 we will use when putting the weapon in the players hands.
-    //     //however, for right now we dont want that position so we'll store it here for later.
-    //     //then, when we put the weapon in the player hand, we'll use this position.
-    //     inherentPosition = weapon.GetChild(1).localPosition;
-
-    //     weapon.transform.position -= inherentPosition;
-
-    //     //make recursive function to set everything to not weapon layer
-    // }
-
-    // public override void DisplayPrompt(Transform canvas)
-    // {
-    //     base.DisplayPrompt(canvas);
-
-    //     //do shit to display the stats ui
-    // }
-
-    // public override void Interact(Transform weaponHolder)
-    // {
-    //     base.Interact(weaponHolder);
-
-    //     //do transfer to player shenanigans: either through
-    //     weapon.parent = weaponHolder;
-    //     weapon.rotation = weaponHolder.rotation;
-    //     weapon.localPosition = Vector3.zero;
-
-    //     weaponHolder.GetComponent<WeaponStateManager>().SetEquippedWeapon(weapon);
-
-    //     Destroy(transform.gameObject);
-    // }
-    
+{    
     //the local position to place this gun at when it's equipped to the player
     private Vector3 inherentPosition;
 
@@ -57,14 +12,46 @@ public class WeaponPickup : Interactable
     // Need to store them for PartsCollector to populate crafting menus
     private int[] weaponParts;
 
+    // Weapon Type to generate
+    private int weaponType;
+
+    [Header("Adjust percentages of weapon types spawning (out of 100)")]
+    [SerializeField] private int riflePercent;
+    [SerializeField] private int pistolPercent;
+    [SerializeField] private int SMGPercent;
+    [SerializeField] private int swordPercent;
+
     //an additional prompt prefab for the weapon stats display
     [SerializeField] private GameObject prefabSheet;
     private GameObject instSheet;
 
+    int RandomWeaponType()
+    {
+        int[] percentages = {riflePercent, pistolPercent, SMGPercent, swordPercent};
+
+        int random = Random.Range(1, 101);
+
+        int i, cumulative = 0;
+
+        for(i = 0; i < 4; i++)
+        {
+            cumulative += percentages[i];
+
+            if(random <= cumulative)
+            {
+                break;
+            }
+        }
+
+        return i;
+    }
+
     void Awake()
     {
+        int weaponType = RandomWeaponType();
+
         //create gun
-        inherentPosition = transform.GetComponent<Banshee45>().Creation(transform, null);
+        inherentPosition = transform.GetComponent<Banshee45>().Creation(transform, null, weaponType);
 
         weaponParts = transform.GetComponent<Banshee45>().WeaponParts;
 
@@ -163,7 +150,7 @@ public class WeaponPickup : Interactable
         transform.rotation = weaponHolder.rotation;
         transform.localPosition = inherentPosition;
 
-        weaponHolder.GetComponent<WeaponStateManager>().SetEquippedWeaponAndStats(transform, stats, weaponParts);
+        weaponHolder.GetComponent<WeaponStateManager>().SetEquippedWeaponAndStats(transform, stats, weaponParts, weaponType);
 
         //Destroy(transform.gameObject);
 

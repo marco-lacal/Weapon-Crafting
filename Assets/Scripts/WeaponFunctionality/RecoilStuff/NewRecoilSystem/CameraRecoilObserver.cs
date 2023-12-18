@@ -95,7 +95,7 @@ public class CameraRecoilObserver : MonoBehaviour, ShootObserver, EquipObserver
         ScreenManager.Instance.WSM.GetComponent<WSMSubject>().AddSObserver((ShootObserver)this);
     }
 
-    public void OnNotify_EquipParts(int[] weaponParts){}
+    public void OnNotify_EquipParts(int[] weaponParts, int weaponType){}
 
     public void OnNotify_Unequip()
     {

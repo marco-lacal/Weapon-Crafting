@@ -19,7 +19,7 @@ public class BaseCrafting : MonoBehaviour
         //create a random one here for testing
         if(partsCollection == null)
         {
-            partsCollection = ScreenManager.Instance.parts.AllParts[weaponTypeID];
+            partsCollection = ScreenManager.Instance.parts.GetPartsArray(weaponTypeID);
 
             Debug.Log(partsCollection.Length + "  " + partsCollection[0].Length);
 

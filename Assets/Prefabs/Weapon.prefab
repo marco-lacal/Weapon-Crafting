@@ -49,6 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prompt: {fileID: 6753199577845030941, guid: 7506d959f21baa44eaadcbaed53810e6, type: 3}
   hasBeenInteractedWith: 0
+  riflePercent: 100
+  pistolPercent: 0
+  SMGPercent: 0
+  swordPercent: 0
   prefabSheet: {fileID: 623818383741028260, guid: 10ccf417bec4c3d448970702f0a5ae2e,
     type: 3}
 --- !u!65 &8339530134686603756
@@ -76,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e882cd466379147a0c67914fe58ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numWeapons: 8
+  min: 0
 --- !u!114 &8339530134686603757
 MonoBehaviour:
   m_ObjectHideFlags: 0
