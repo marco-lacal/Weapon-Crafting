@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class PartsCollector : MonoBehaviour, EquipObserver
 {
+    public int RifleCount {get {return numRifles;}}
+    public int SMGCount {get {return numSMGs;}}
+    public int PistolCount {get {return numPistols;}}
+    public int SwordCount {get {return numSwords;}}
+
+    public int RiflePartsCount {get {return numRifleParts;}}
+    public int SMGPartsCount {get {return numSMGParts;}}
+    public int PistolPartsCount {get {return numPistolParts;}}
+    public int SwordPartsCount {get {return numSwordParts;}}
+
+
     private int[][] rifleParts;
     private int[][] smgParts;
     private int[][] pistolParts;
@@ -24,21 +35,73 @@ public class PartsCollector : MonoBehaviour, EquipObserver
     // Stores the number of parts collected for each weapon type. 
     // Number of parts for the i-th index weapon is PartsCollection[i]
     // 0 : RifleParts   1 : SMGParts    2 : PistolParts     3 : SwordParts
-    private int[] PartsCollection = new int[4];
+    private int[] partsCollection = new int[4];
 
     // Stores the number of complete weapon patterns for each weapon type.
     // Number of complete weapon patterns for the ith weapon is CompleteWeaponsCollection[i]
     // 0 : RifleParts   1 : SMGParts    2 : PistolParts     3 : SwordParts
-    private int[] CompleteWeaponsCollection = new int[4];
+    private int[] completeWeaponsCollection = new int[4];
 
     public int GetIndexedParts(int weaponType)
     {
-        return PartsCollection[weaponType];
+        return partsCollection[weaponType];
     }
 
     public int GetCompletePatterns(int weaponType)
     {
-        return CompleteWeaponsCollection[weaponType];
+        return completeWeaponsCollection[weaponType];
+    }
+
+    public int GetNumberOfParts(int weaponType)
+    {
+        int temp = 0;
+
+        switch(weaponType)
+        {
+            case 0:
+                temp = numRifleParts;
+                break;
+            case 1:
+                temp = numSMGParts;
+                break;
+            case 2:
+                temp = numPistolParts;
+                break;
+            case 3:
+                temp = numSwordParts;
+                break;
+            default:
+                Debug.Log("Oh No");
+                break;
+        }
+
+        return temp;
+    }
+
+    public int GetNumberOfEachWeapon(int weaponType)
+    {
+        int temp = 0;
+
+        switch(weaponType)
+        {
+            case 0:
+                temp = numRifles;
+                break;
+            case 1:
+                temp = numSMGs;
+                break;
+            case 2:
+                temp = numPistols;
+                break;
+            case 3:
+                temp = numSwords;
+                break;
+            default:
+                Debug.Log("Oh No");
+                break;
+        }
+
+        return temp;
     }
 
     public int[][] GetPartsArray(int weaponType)
@@ -162,7 +225,7 @@ public class PartsCollector : MonoBehaviour, EquipObserver
             if(partsArray[i][weaponParts[i] - 1] == 0)
             {
                 partsArray[i][weaponParts[i] - 1] = 1;
-                PartsCollection[weaponType]++;  // Update the count of individual parts found
+                partsCollection[weaponType]++;  // Update the count of individual parts found
 
                 // Check if the weapon pattern this part belongs to is complete (last row contains these values)
                 // If not ( == 0), then loop through that weapon's parts. If any part is 0, dont continue
@@ -186,7 +249,7 @@ public class PartsCollector : MonoBehaviour, EquipObserver
                     {
                         Debug.Log("COMPLETED WEAPON " + weaponParts[i]);
                         partsArray[6][weaponParts[i] - 1] = 1;
-                        CompleteWeaponsCollection[weaponType]++;    // Update the count of complete weapon patterns
+                        completeWeaponsCollection[weaponType]++;    // Update the count of complete weapon patterns
                     }
                 }
                 // Else: do nothing
