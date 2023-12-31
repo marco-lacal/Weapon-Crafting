@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: a8a8f251b2f2830409b12ce1233c8a6e
+guid: 7049184cdc9d99545b2592f28d8f904a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark Steel
+    second: {fileID: 2100000, guid: e9817e1fca2eef6449040e2d62ff5686, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lock
+    second: {fileID: 2100000, guid: 09bc4c54e9568e94f8bbc29ff393f6ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Steel
+    second: {fileID: 2100000, guid: 2e312536522e029499cb667923ca56b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 65a475ca0d810dd4aae1de7e677ffac9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

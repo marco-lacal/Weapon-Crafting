@@ -1030,7 +1030,7 @@ MonoBehaviour:
   craftingScreen: {fileID: 2709263549383884137, guid: 80082cbff5a448444b23b3d659087254,
     type: 3}
   reforgeScreen: {fileID: 0}
-  noWeaponEquippedGO: {fileID: 3802500641854970466}
+  noWeaponEquipped: {fileID: 4746363792144698750}
 --- !u!1 &9162745230237639401
 GameObject:
   m_ObjectHideFlags: 0

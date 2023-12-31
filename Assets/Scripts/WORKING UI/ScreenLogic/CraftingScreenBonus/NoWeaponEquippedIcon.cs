@@ -19,8 +19,6 @@ public class NoWeaponEquippedIcon : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Hello tehre");
-
         icon = transform.GetComponent<Image>();
         text = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 

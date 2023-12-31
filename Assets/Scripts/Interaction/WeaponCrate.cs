@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponCrate : Interactable
+public class WeaponCrate : Interactable, CreateWeaponInterface
 {
 
     [SerializeField] private Transform lid;
@@ -13,6 +13,17 @@ public class WeaponCrate : Interactable
     private GameObject topOfLid;
     private RotateLid script;
 
+    // Weapon Type to generate
+    private int weaponType;
+
+    [Header("Adjust percentages of weapon types spawning for this chest (out of 100)")]
+    [SerializeField] private int riflePercent;
+    [SerializeField] private int pistolPercent;
+    [SerializeField] private int SMGPercent;
+    [SerializeField] private int swordPercent;
+
+    public event CreateWeaponInterface.CreateWeapon CreateWeaponEvent;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -20,6 +31,29 @@ public class WeaponCrate : Interactable
 
         //"_Lid" is specified as the top object in the children hierarchy and is thus at index 0
         topOfLid = lid.GetChild(0).gameObject;
+
+        weaponType = RandomWeaponType();
+    }
+
+    int RandomWeaponType()
+    {
+        int[] percentages = {riflePercent, pistolPercent, SMGPercent, swordPercent};
+
+        int random = Random.Range(1, 101);
+
+        int i, cumulative = 0;
+
+        for(i = 0; i < 4; i++)
+        {
+            cumulative += percentages[i];
+
+            if(random <= cumulative)
+            {
+                break;
+            }
+        }
+
+        return i;
     }
 
     public override void Interact(Transform temp)
@@ -72,17 +106,20 @@ public class WeaponCrate : Interactable
 
     IEnumerator WaitForRotation()
     {
+        // try instantiating the wp as a child so it can get a reference to the unique non-static event 
+        // to prevent multiple wps subscribing to one crate instead of their own crate
+        GameObject wP = Instantiate(weaponPickup, transform.position + Vector3.up, Quaternion.identity, transform);
+
         //this will remain true as long as the RotateLid script is active
         while(script.enabled)
         {
             yield return null;
         }
 
-        //Rotation has stopped. now create weaponpickup
-        //Instantiate a weaponPickup
-        GameObject wP = Instantiate(weaponPickup, transform.position + Vector3.up, Quaternion.identity);
-        
         //to match the direction of the crate
-        wP.transform.localEulerAngles = transform.localEulerAngles;
+        wP.transform.eulerAngles = transform.eulerAngles;
+
+        // call the event that weaponPickup should have subscribed to by now
+        CreateWeaponEvent(weaponType, null);
     }
 }

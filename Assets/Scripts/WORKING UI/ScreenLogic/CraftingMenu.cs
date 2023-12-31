@@ -7,7 +7,7 @@ public class CraftingMenu : MonoBehaviour
     [SerializeField] private GameObject craftingScreen;
     [SerializeField] private GameObject reforgeScreen;
 
-    [SerializeField] private GameObject noWeaponEquippedGO;
+    [SerializeField] private NoWeaponEquippedIcon noWeaponEquipped;
 
     // Start is called before the first frame update
     public void CraftButton()
@@ -19,7 +19,7 @@ public class CraftingMenu : MonoBehaviour
     {
         if(ScreenManager.Instance.WSM.GetComponent<WeaponStateManager>().EquippedWeapon == null)
         {
-            noWeaponEquippedGO.GetComponent<NoWeaponEquippedIcon>().ActivateIcon();
+            noWeaponEquipped.ActivateIcon();
             return;
         }
         else

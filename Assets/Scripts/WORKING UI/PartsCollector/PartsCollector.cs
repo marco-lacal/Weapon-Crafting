@@ -196,7 +196,7 @@ public class PartsCollector : MonoBehaviour, EquipObserver
     void OnDisable()
     {
         //remove this object from the subject's list of subscribers. will be WSM
-        if(ScreenManager.Instance != null) ScreenManager.Instance.WSM.GetComponent<WSMSubject>().RemoveEObserver((EquipObserver)this);
+        if(ScreenManager.Instance != null && ScreenManager.Instance.WSM != null) ScreenManager.Instance.WSM.GetComponent<WSMSubject>().RemoveEObserver((EquipObserver)this);
     }
 
     // public int[] GetSpecificRow(int typeID, int partID)

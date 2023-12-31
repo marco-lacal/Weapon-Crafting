@@ -7,68 +7,60 @@ public class WeaponPickup : Interactable
     //the local position to place this gun at when it's equipped to the player
     private Vector3 inherentPosition;
 
+    private BoxCollider hitbox;
+    private Rigidbody physics;
+
     private StatSheet stats;
 
     // Need to store them for PartsCollector to populate crafting menus
     private int[] weaponParts;
 
-    // Weapon Type to generate
     private int weaponType;
-
-    [Header("Adjust percentages of weapon types spawning (out of 100)")]
-    [SerializeField] private int riflePercent;
-    [SerializeField] private int pistolPercent;
-    [SerializeField] private int SMGPercent;
-    [SerializeField] private int swordPercent;
 
     //an additional prompt prefab for the weapon stats display
     [SerializeField] private GameObject prefabSheet;
     private GameObject instSheet;
 
-    int RandomWeaponType()
-    {
-        int[] percentages = {riflePercent, pistolPercent, SMGPercent, swordPercent};
-
-        int random = Random.Range(1, 101);
-
-        int i, cumulative = 0;
-
-        for(i = 0; i < 4; i++)
-        {
-            cumulative += percentages[i];
-
-            if(random <= cumulative)
-            {
-                break;
-            }
-        }
-
-        return i;
-    }
-
     void Awake()
     {
-        int weaponType = RandomWeaponType();
+        // ALL OBJECTS THAT WILL INSTANTIATE WEAPONPICKUP WILL BE MADE A CHILD FIRST SO THIS SHOULD ALWAYS RETURN THE CORRECT COMPONENT
+        transform.parent.GetComponent<CreateWeaponInterface>().CreateWeaponEvent += MakeWeaponObject;
 
-        //create gun
-        inherentPosition = transform.GetComponent<Banshee45>().Creation(transform, null, weaponType);
+        hitbox = transform.GetComponent<BoxCollider>();
+    }
 
+    public void MakeWeaponObject(int type, int[] parts)
+    {
+        // REMOVE SELF FROM EVENT
+        transform.parent.GetComponent<CreateWeaponInterface>().CreateWeaponEvent -= MakeWeaponObject;
+
+        // OBJECT SETUP
+
+        // it is no longer a child of its individual weaponcrate
+        transform.parent = null;
+
+        //enable BoxCollider so the raycast from player camera can collide with this object again
+        hitbox.enabled = true;
+
+        //for physics shenanagins
+        physics = transform.gameObject.AddComponent<Rigidbody>();
+
+        // WEAPON CREATION CALLS
+
+        // Will always be between 0 and number of weapon types - 1. The weapon crates will generate from this range and the crafting screens will send their value
+        weaponType = type;
+
+        // Save the parts into our weaponParts variable to later give the part numbers to WSM for PartsCollector
+        weaponParts = parts;
+
+        //create gun - if parts was null, then Banshee45 will generate parts
+        inherentPosition = transform.GetComponent<Banshee45>().Creation(transform, weaponParts, weaponType);
         weaponParts = transform.GetComponent<Banshee45>().WeaponParts;
-
         Destroy(transform.GetComponent<Banshee45>());
 
         //create stats
         stats = transform.GetComponent<StatsCreation>().CalculateStats();
-
         Destroy(transform.GetComponent<StatsCreation>());
-
-        //USE THIS FOR TESTING LATER
-        //PrintStats();
-
-        //transform.position -= inherentPosition;
-
-        //make recursive function to set everything to not weapon layer
-        //VERY IMPORTANT TO DO
     }
 
     //when this script is enabled, it means its either been spawned for the first time or been dropped
@@ -76,14 +68,16 @@ public class WeaponPickup : Interactable
     {
         hasBeenInteractedWith = false;
 
-        //enable BoxCollider so the raycast from player camera can collide with this object again
-        transform.GetComponent<BoxCollider>().enabled = true;
+        if(inherentPosition != Vector3.zero)
+        {
+            //enable BoxCollider so the raycast from player camera can collide with this object again
+            Debug.Log("WAAAA");
+            hitbox.enabled = true; 
+            physics = transform.gameObject.AddComponent<Rigidbody>();
+        }
 
         //set the layers to Interactable from Weapon
         RecursivelyChangeLayers(transform, 8);
-
-        //for physics shenanagins
-        transform.gameObject.AddComponent<Rigidbody>();
     }
 
     //whenever the gun is picked up
@@ -95,12 +89,13 @@ public class WeaponPickup : Interactable
             return;
         }
         
-        transform.GetComponent<BoxCollider>().enabled = false;
+        hitbox.enabled = false;
         
         //set gun layers to Weapon so weapon camera can see it properly
         RecursivelyChangeLayers(transform, 6);
 
-        Destroy(transform.GetComponent<Rigidbody>());
+        // only check null incase game quits before rigidbody is created (between open chest and MakeWeapon)
+        if(physics != null) Destroy(physics);
     }
 
     private void PrintStats()
@@ -143,7 +138,7 @@ public class WeaponPickup : Interactable
     {
         base.Interact(weaponHolder);
 
-        transform.GetComponent<BoxCollider>().enabled = false;
+        hitbox.enabled = false;
 
         //do transfer to player shenanigans: either through
         transform.parent = weaponHolder;
