@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public abstract class BaseCrafting : MonoBehaviour// , CreateWeaponInterface
 {
     public int WeaponTypeID {get {return weaponTypeID;}}
+    public int NumberOfWeaponParts {get {return numWeaponParts;}}
+    public int NumberOfEachWeapon {get {return numEachWeapon;}}
 
     [Header("Use appropriate prefabs")]
     [SerializeField] private GameObject PartsCollectionBox;
@@ -16,6 +18,8 @@ public abstract class BaseCrafting : MonoBehaviour// , CreateWeaponInterface
     [SerializeField] private GameObject noCraftingIcon;
 
     private int[][] partsCollection;
+    private int numWeaponParts;
+    private int numEachWeapon;
 
     // public event CreateWeaponInterface.CreateWeapon CreateWeaponEvent;
 
@@ -23,6 +27,9 @@ public abstract class BaseCrafting : MonoBehaviour// , CreateWeaponInterface
 
     void Awake()
     {
+        numWeaponParts = ScreenManager.Instance.parts.GetNumberOfParts(weaponTypeID);
+        numEachWeapon = ScreenManager.Instance.parts.GetNumberOfEachWeapon(weaponTypeID);
+
         //get partsCollection from somewhere in the game
         //create a random one here for testing
         if(partsCollection == null)

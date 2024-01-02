@@ -54,6 +54,8 @@ public class StatsCreation : MonoBehaviour
         //now create int List that will store combined totals of each stat
         List<int> statsList = new List<int>();
 
+        Debug.Log("From Stats Creation: " + parts[1].StatsList[0]);
+
         //10 stats so i: 0->9
         for(int i = 0; i < 10; i++)
         {

@@ -12,7 +12,7 @@ public class Viewport : MonoBehaviour
         weaponType = transform.parent.GetComponent<BaseCrafting>().WeaponTypeID;
     }
 
-    public void Make3DModel(GameObject newPart)
+    public void Make3DModel(int partType, GameObject newPart)
     {
         // ...
     }

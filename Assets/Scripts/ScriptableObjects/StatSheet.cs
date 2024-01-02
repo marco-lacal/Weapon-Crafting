@@ -39,6 +39,7 @@ public class StatSheet : ScriptableObject
 
     //indices 0-5 refer to each part alphabetically (0 = Barrel; 1 = Body; etc). values range between 1 and the number of weapons of some type
     //used in the reforge process that will need to access what parts are used
+    // Not sure about this anymore
     private int[] partsList;
     
     private int practicalMagazine;
@@ -58,18 +59,19 @@ public class StatSheet : ScriptableObject
     //on awake, create a List containing the stats
     public void SetStatsListForParts()
     {
-        statsList = new List<int>();
-
-        statsList.Add(rateOfFire);
-        statsList.Add(damage);
-        statsList.Add(range);
-        statsList.Add(stability);
-        statsList.Add(recoilControl);
-        statsList.Add(handling);
-        statsList.Add(reloadSpeed);
-        statsList.Add(magazine);
-        statsList.Add(zoomFactor);
-        statsList.Add(inventorySize);
+        statsList = new List<int>
+        {
+            rateOfFire,
+            damage,
+            range,
+            stability,
+            recoilControl,
+            handling,
+            reloadSpeed,
+            magazine,
+            zoomFactor,
+            inventorySize
+        };
     }
 
     //set the StatSheet stats equal to the passed in List values
