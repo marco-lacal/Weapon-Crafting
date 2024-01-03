@@ -91,6 +91,11 @@ public class PartHolder : MonoBehaviour
 
         gameobjectPartsArray[partType] = (GameObject)Resources.Load(temp);
 
+        if(partType == 1)
+        {
+            gameobjectPartsArray[partType].GetComponent<WeaponPartBase>().StatSheet.Name = gameobjectPartsArray[partType].GetComponent<Body>().Name;
+        }
+
         sDisplay.AddPart(partType, gameobjectPartsArray[partType].GetComponent<WeaponPartBase>().StatSheet);
         vDisplay.Make3DModel(partType, gameobjectPartsArray[partType]);
     }
