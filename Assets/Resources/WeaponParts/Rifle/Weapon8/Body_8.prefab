@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3404086087293750708}
   - component: {fileID: 1973064194719521091}
   - component: {fileID: 5040449249263400013}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5367536885889588686}
   - component: {fileID: 6816271005633105397}
   - component: {fileID: 3689064448489243260}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MagazineToBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 2723273386582385020}
   - component: {fileID: 5350393803892150968}
   - component: {fileID: 860945227184580452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BarrelToBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 8274862465391562689}
   - component: {fileID: 287821075777526928}
   - component: {fileID: -599211991367034236}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 5140685517319619030}
   - component: {fileID: 7763930136814976170}
   - component: {fileID: 4155888327318918857}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 9053733262394309372}
   - component: {fileID: 8300735060890313917}
   - component: {fileID: 7652816709703717919}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 6777417209994368183}
   - component: {fileID: 5567800592241662261}
   - component: {fileID: 1013959001061733128}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 6589208585041714819}
   - component: {fileID: 4017933628705200955}
   - component: {fileID: 8316143512151030359}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ScopeToBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 5620121395138324283}
   - component: {fileID: 5624898010529583070}
   - component: {fileID: 1046378791869633379}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 3615492336270036522}
   - component: {fileID: 2879924311188730990}
   - component: {fileID: 4484442037915454011}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +879,7 @@ GameObject:
   - component: {fileID: 5019846145667791908}
   - component: {fileID: 6427141957338176465}
   - component: {fileID: 3941036980926159392}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 478134673455439818}
   - component: {fileID: 1296660196930312461}
   - component: {fileID: 2478437126124049334}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 2965084871763871017}
   - component: {fileID: 8502092900027911502}
   - component: {fileID: 6329261830312917486}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GripToBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 7130610969914302711}
   - component: {fileID: 608065061252971421}
   - component: {fileID: 6568570689083121354}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1211,7 +1211,7 @@ GameObject:
   - component: {fileID: 3286316112869596487}
   - component: {fileID: 8757024091914629992}
   - component: {fileID: 3572631048422955239}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1294,7 +1294,7 @@ GameObject:
   - component: {fileID: 6886011229838286561}
   - component: {fileID: 3503086706146291576}
   - component: {fileID: 2082508802466738500}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StockToBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}

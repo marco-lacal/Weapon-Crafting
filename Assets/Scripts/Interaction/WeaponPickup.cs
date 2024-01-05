@@ -23,7 +23,7 @@ public class WeaponPickup : Interactable
 
     void Awake()
     {
-        // ALL OBJECTS THAT WILL INSTANTIATE WEAPONPICKUP WILL BE MADE A CHILD FIRST SO THIS SHOULD ALWAYS RETURN THE CORRECT COMPONENT
+        // ALL OBJECTS THAT WILL INSTANTIATE WEAPONPICKUP WILL BE MADE PARENT FIRST SO THIS SHOULD ALWAYS RETURN THE CORRECT COMPONENT
         transform.parent.GetComponent<CreateWeaponInterface>().CreateWeaponEvent += MakeWeaponObject;
 
         hitbox = transform.GetComponent<BoxCollider>();

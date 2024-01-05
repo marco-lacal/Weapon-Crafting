@@ -8,6 +8,7 @@ public class ScreenManager : MonoBehaviour
 {
     public static ScreenManager Instance {get; private set;}
     public PartsCollector parts {get{return pC;}}
+    public Transform CallerObject {get {return callerGameObject;} set {callerGameObject = value;}}
 
     //delete these
 
@@ -20,6 +21,7 @@ public class ScreenManager : MonoBehaviour
 
     private Stack<GameObject> stack;
     private GameObject currScreen;
+    private Transform callerGameObject;
 
     private void Awake()
     {
@@ -83,6 +85,16 @@ public class ScreenManager : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            callerGameObject = null;
+        }
+    }
+
+    public void CraftSuccessful()
+    {
+        while(stack.Count > 1)
+        {
+            PopScreen();
         }
     }
 }

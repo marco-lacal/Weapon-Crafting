@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8616051333548929462}
   - component: {fileID: 5416208344337089282}
   - component: {fileID: -1144282858406892343}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grip_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 9222349839150725687}
   - component: {fileID: 5683986940107347774}
   - component: {fileID: 2440138609029604626}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 9018583842222019394}
   - component: {fileID: 4661926004862000494}
   - component: {fileID: 3839405629912624192}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,6 +6,9 @@ public class CraftingBench : Interactable
 {
     [SerializeField] private GameObject craftingMenu;
 
+    [Header("Transform that the weaponpickup will be made a child of")]
+    [SerializeField] private Transform weaponPickupLocation;
+
     // private GameObject instCraftingMenu;
 
     private Transform canvasRef;
@@ -39,6 +42,9 @@ public class CraftingBench : Interactable
         // {
         //     instCraftingMenu.SetActive(true);
         // }
+
+        // Send the craftingbench transform so that the crafting screens can have a reference that is passed up to it to attach the 
+        ScreenManager.Instance.CallerObject = weaponPickupLocation;
 
         ScreenManager.Instance.Push(craftingMenu);
 

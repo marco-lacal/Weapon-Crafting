@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3859655425193888116}
   - component: {fileID: 4056152030208694629}
   - component: {fileID: 9053994008049433450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8527718833738969397}
   - component: {fileID: 8457004188420119333}
   - component: {fileID: 7046232025160657130}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6990016048881387547}
   - component: {fileID: 3414503818090119755}
   - component: {fileID: 3207822479712549766}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 7835473849735845538}
   - component: {fileID: 2144897485456853131}
   - component: {fileID: 5557276811350429210}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2686590598177647766}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 1031123054019882082}
   - component: {fileID: 4451434679570408948}
   - component: {fileID: -2982218479993288242}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Scope_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

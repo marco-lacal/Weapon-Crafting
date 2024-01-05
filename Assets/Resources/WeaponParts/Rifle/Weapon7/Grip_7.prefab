@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2351790332370785521}
   - component: {fileID: 965860809301749064}
   - component: {fileID: 2079679985045680446}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8239904036952770447}
   - component: {fileID: 2652754198248597680}
   - component: {fileID: 5908833105124776802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 4865006043118000843}
   - component: {fileID: 5515998758443750984}
   - component: {fileID: -2903202930116936398}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grip_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}

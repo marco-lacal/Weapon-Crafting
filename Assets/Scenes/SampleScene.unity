@@ -305,7 +305,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1975
+    m_Bits: 951
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2673,10 +2673,20 @@ PrefabInstance:
       propertyPath: riflePercent
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2257384780144880315, guid: 93eeb680eb0455340b56760534fbccbd,
+        type: 3}
+      propertyPath: swordPercent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6941681753736884953, guid: 93eeb680eb0455340b56760534fbccbd,
         type: 3}
       propertyPath: m_Name
       value: WeaponCrate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710547448361177340, guid: 93eeb680eb0455340b56760534fbccbd,
+        type: 3}
+      propertyPath: m_Mass
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7718640253484689507, guid: 93eeb680eb0455340b56760534fbccbd,
         type: 3}

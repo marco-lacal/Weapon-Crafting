@@ -29,6 +29,22 @@ public class PartHolder : MonoBehaviour
     private int weaponType;
     private int initializationValue;    // number of weapons used to check if the dropdowns are being initialized
 
+    /*
+        Each time a part is selected by the dropdown menu script, the part type and a number for the weapon it belongs to is sent here.
+        Then this script constructs a string based on the part type and weapon number to use to search through the Resources folder and retrieve the reference.
+        Because of this, a valid sequence of part selections is: barrel_1, barrel_3, barrel_1, barrel_3, barrel_1, barrel_3, barrel_1, barrel_3, ...; causing the script
+        to build the same two strings, search for the same two references based on the strings, then retrieve the reference.
+        
+        If we instead store all weapon parts the user selected in this current iteration into a Dictionary/Hashtable, 
+        anytime a repeat part is wanted we can get it faster from the Dictionary.
+        
+        To create unique keys to store the approriate reference, the script will create an integers that are a combination of the part type and the weapon number
+        Note: both values will be 1-based indexing, so Barrel = 1, Body = 2, etc
+        Example: Barrel_4 -> 14; Scope_2 -> 42; Body_12 (assuming there are that many) -> 212
+    */
+
+    private Dictionary<int, GameObject> repeatParts;
+
     private string startOfPath;
 
     public delegate void SendToStats(StatSheet newPart, int partType);
@@ -63,6 +79,8 @@ public class PartHolder : MonoBehaviour
 
         previousParts = new int[temp];
         Array.Fill(previousParts, -1);
+
+        repeatParts = new Dictionary<int, GameObject>();
     }
 
     void OnDisable()
@@ -74,29 +92,36 @@ public class PartHolder : MonoBehaviour
     {
         if(weaponNumber == -1)
         {
-            Debug.Log("Subtract stats and gameobject");
             sDisplay.SubtractPart(partType);
+            vDisplay.Make3DModel(partType, null);
 
-            // 1) went from -1 to -1 (went from "0" to "?", or "?" to "?")
-
-            // 2) went from a valid number to -1 (went 1-numWeapons to "?")
             return;
         }
 
-        Debug.Log(weaponNumber);
+        int hash = Int32.Parse((partType + 1).ToString() + (weaponNumber + 1).ToString());
 
-        string temp = startOfPath + (weaponNumber+1).ToString() + "/" + ((PartType)partType).ToString() + "_" + (weaponNumber+1);
+        if(repeatParts.TryGetValue(hash, out GameObject foundRepeat))
+        {
+            Debug.Log("DUPLICATE");
+            gameobjectPartsArray[partType] = foundRepeat;
+        }
+        else
+        {
+            string temp = startOfPath + (weaponNumber+1).ToString() + "/" + ((PartType)partType).ToString() + "_" + (weaponNumber+1);
 
-        Debug.Log(temp);
+            gameobjectPartsArray[partType] = (GameObject)Resources.Load(temp);
 
-        gameobjectPartsArray[partType] = (GameObject)Resources.Load(temp);
-
+            repeatParts[hash] = gameobjectPartsArray[partType];
+        }
+        
+        StatSheet newPart = gameobjectPartsArray[partType].GetComponent<WeaponPartBase>().StatSheet;
+        
         if(partType == 1)
         {
-            gameobjectPartsArray[partType].GetComponent<WeaponPartBase>().StatSheet.Name = gameobjectPartsArray[partType].GetComponent<Body>().Name;
+            newPart.Name = gameobjectPartsArray[partType].GetComponent<Body>().Name;
         }
 
-        sDisplay.AddPart(partType, gameobjectPartsArray[partType].GetComponent<WeaponPartBase>().StatSheet);
+        sDisplay.AddPart(partType, newPart);
         vDisplay.Make3DModel(partType, gameobjectPartsArray[partType]);
     }
 

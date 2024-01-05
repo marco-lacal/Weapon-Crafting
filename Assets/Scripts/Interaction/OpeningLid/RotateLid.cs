@@ -36,6 +36,7 @@ public class RotateLid : MonoBehaviour
     {
         if(collision.collider.gameObject.layer == 7)
         {
+            Destroy(transform.GetComponent<Rigidbody>());
             active = false;
         }
     }

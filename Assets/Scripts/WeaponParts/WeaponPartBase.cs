@@ -12,7 +12,10 @@ public abstract class WeaponPartBase : MonoBehaviour
 
     void Awake()
     {
-        statSheet.SetStatsListForParts();
+        if(statSheet != null)
+        {
+            statSheet.SetStatsListForParts();
+        }
     }
 
     public void ClearList()
