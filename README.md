@@ -3,6 +3,7 @@ A modular weapon crafting system that creates randomized weapons from base model
 You can find all of these scripts and more in the Assets folder. Each file will have comments throughout to explain what is happening at each step. For an even more in-depth look at the project, see my portfolio here: 
 
 **Weapon Stats**
+
 Rate of Fire: Frequency at which this weapon can shoot
 Damage: Maximum value that each bullet fired from this weapon can deal to a target
 Range: Distance that this weapon can be fired at and still get the maximum damage value. Shooting a target out of the range will deal decreased damage
